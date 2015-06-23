@@ -6,8 +6,8 @@
 		<link rel="stylesheet" href="style.css" />
 		<script src="socket.io/socket.io.js"></script>
 		<script src="jquery.min.js"></script>
-		<script src="client.js"></script>
-		
+		<!-- <script src="client.js"></script> -->
+		<script src="engine.js"></script>
 		
 		<!-- Das neueste kompilierte und minimierte CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
@@ -78,27 +78,27 @@
 				
 					<div class="center-block col-md-12">
 					
-						<center><h2>Lenkung</h2></center>
+						<center><h2>Motor Konfiguration</h2></center>
 						
 						<div class="panel">
 							
 							<div class="col-sx-3 col-sm-3 col-md-6 col-lg-6 ">
-							<p>Lenkung Max </p>	
+							<p>Motor Maximal Geschwindigkeit </p>	
 							</div>
 							<div class="col-sx-3 col-sm-3 col-md-6 col-lg-6"
-							<label id="LenkungMaxLabel">0</label> 
+							<label id="EngineSpeedMaxLabel">0</label> 
 							</div>
-							<input id="LenkungMax" type="range"  min="0" max="255"/>
+							<input id="EngineSpeedMax" type="range"  min="0" max="255"/>
 						</div>
 						
 						<div class="panel ">
 							<div class="col-sx-3 col-sm-3 col-md-6 col-lg-6 ">
-							<p>Lenkung Min </p>	
+							<p>Motor Min Start Frequenz </p>	
 							</div>
 							<div class="col-sx-3 col-sm-3 col-md-6 col-lg-6"
-							<label id="LenkungMinLabel">0</label> 
+							<label id="EngineSpeedStartMinLabel">0</label> 
 							</div>
-							<input id="LenkungMin" type="range"  min="0" max="255"/>	
+							<input id="EngineSpeedStartMin" type="range"  min="0" max="60"/>	
 						</div>
 							
 							
@@ -106,19 +106,19 @@
 						<div class="panel">
 							
 							<div class="col-sx-3 col-sm-3 col-md-6 col-lg-6 ">
-							<p>Lenkung Center </p>	
+							<p>Motor Start Rampe </p>	
 							</div>
 							<div class="col-sx-3 col-sm-3 col-md-6 col-lg-6"
-							<label id="LenkungCenterLabel">0</label> 
+							<label id="EngineRampTimeLabel">0</label> 
 							</div>
-							<input id="LenkungCenter" type="range"  min="0" max="255"/>
+							<input id="EngineRampTime" type="range"  min="0" max="255"/>
 						</div>
 						
 					</div>
 				</div>
 		</div>
 		
-		
+	<!--	
 		<div class="col-sm-12 col-xs-12 col-md-6 col-lg-4">
 				<div class="panel panel-default">	
 					<div class="center-block col-md-12 col-lg-12">
@@ -152,7 +152,7 @@
 		</div>	
 		
 	</div>	
-	
+	-->
 	
 	
 	
