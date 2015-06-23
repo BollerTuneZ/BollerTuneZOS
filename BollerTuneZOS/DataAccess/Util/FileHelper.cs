@@ -16,68 +16,160 @@ namespace DataAccess.Util
     {
         private static readonly ILog SLog = LogManager.GetLogger(typeof (FileHelper));
         private const string SettingsFilePath = @"\Settings\settings.btz";
-
+        private const string PluginListFilePath = @"\Plugin\pluginList.btz";
+        private const string SettingsDirectory = @"\Settings";
+        private const string PluginDirectory = @"\Plugin";
         public FileHelper()
         {
-            var directoryPath = String.Format("{0}{1}",Environment.CurrentDirectory, @"\Settings");
-            var settingsDirectory = new DirectoryInfo(directoryPath);
-            if (!settingsDirectory.Exists)
-            {
-                SLog.DebugFormat("Directory {0} does not exists, try to create",settingsDirectory.Name);
-                try
-                {
-                    settingsDirectory.Create();
-                }
-                catch (Exception e)
-                {
-                    SLog.ErrorFormat("Could not create directory {0}, {1}",settingsDirectory.FullName,e);
-                }
-                if (new DirectoryInfo(directoryPath).Exists)
-                {
-                    SLog.DebugFormat("Directory {0} successfully created",settingsDirectory.Name);
-                }
-                else
-                {
-                    SLog.ErrorFormat("Directory {0} NOT created", settingsDirectory.FullName);
-                }
-            }
+            
+            CreateDirectory(SettingsDirectory);
+            CreateDirectory(PluginDirectory);
         }
 
+        #region Plugin
+
+        public void WritePluginList(string content)
+        {
+            var filePath = String.Format(Environment.CurrentDirectory, PluginListFilePath);
+            WriteFile(filePath,content);
+        }
+
+        public string ReadPluginList()
+        {
+            return ReadFile(String.Format(Environment.CurrentDirectory, PluginListFilePath));
+        }
+
+        public string CopyPluginDirectory(string source,string name)
+        {
+            var directoryInfo = new DirectoryInfo(source);
+            var destinationDirectory = String.Format("{0}{1}\\{2}", Environment.CurrentDirectory, PluginDirectory, name);
+            if ((new DirectoryInfo(destinationDirectory)).Exists)
+            {
+                return null;
+            }
+            directoryInfo.MoveTo(destinationDirectory);
+            if (!(new DirectoryInfo(destinationDirectory)).Exists)
+            {
+                return null;
+            }
+            return destinationDirectory;
+        }
+        #endregion
+
+        #region SettingsFile
         public void WriteSettingsFile(string content)
         {
             var currentDirectory = Environment.CurrentDirectory;
             var filePath = String.Format("{0}{1}", currentDirectory, SettingsFilePath);
-            try
-            {
-                SLog.DebugFormat("Write SettingsFile {0}", filePath);
-                File.WriteAllText(filePath, content);
-            }
-            catch (IOException e)
-            {
-                SLog.ErrorFormat("Could not write SettingsFile {0}: {1}",filePath,e);
-            }
+            WriteFile(filePath,content);
         }
 
         public string ReadSettingsFile()
         {
             var currentDirectory = Environment.CurrentDirectory;
             var filePath = String.Format("{0}{1}",currentDirectory, SettingsFilePath);
+            return ReadFile(filePath);
+        }
+        #endregion
+
+        #region Generall
+
+        public bool DeleteFile(string file)
+        {
             try
             {
-                SLog.DebugFormat("Read SettingsFile {0}", filePath);
-                var content = File.ReadAllText(filePath);
-                if (String.IsNullOrWhiteSpace(content))
-                {
-                    SLog.ErrorFormat("SettingsFile {0} is empty/null", filePath);
-                    return null;
-                }
-                return content;
+                File.Delete(file);
+                return File.Exists(file);
             }
             catch (IOException e)
             {
-                SLog.ErrorFormat("Could not read SettingsFile {0}: {1}", filePath, e);
+                SLog.ErrorFormat("Could not delete file {0}, {1}",file,e);
+                return false;
+            }
+        }
+
+        public bool DeleteDirectory(string directory)
+        {
+            try
+            {
+                var dirInfo = new DirectoryInfo(directory);
+                if (!dirInfo.Exists)
+                {
+                    SLog.WarnFormat("Directory {0} is missing",directory);
+                    return true;
+                }
+                dirInfo.Delete(true);
+                if ((new DirectoryInfo(directory)).Exists)
+                {
+                    SLog.ErrorFormat("Could not delete directory {0}",directory);
+                    return false;
+                }
+                return true;
+            }
+            catch (IOException e)
+            {
+                SLog.ErrorFormat("Could not delete directory {0}, {1}", directory, e);
+                return false;
+            }
+        }
+        #endregion
+
+
+        #region Member
+        void WriteFile(string path, string content)
+        {
+            try
+            {
+                File.WriteAllText(path,content);
+            }
+            catch (IOException e)
+            {
+                SLog.DebugFormat("Could not write file {0}, {1}",e);
+            }
+        }
+
+        string ReadFile(string path)
+        {
+            try
+            {
+                return File.ReadAllText(path);
+            }
+            catch (IOException e)
+            {
+                SLog.DebugFormat("Could not Read file {0}, {1}",path,e);
                 return null;
             }
         }
+
+        void CreateDirectory(string directory)
+        {
+            var path = String.Format("{0}{1}", Environment.CurrentDirectory, directory);
+            var directoryInfo = new DirectoryInfo(path);
+            if (!directoryInfo.Exists)
+            {
+                SLog.DebugFormat("Directory {0} does not exists, try to create", directoryInfo.Name);
+                try
+                {
+                    directoryInfo.Create();
+                }
+                catch (Exception e)
+                {
+                    SLog.ErrorFormat("Could not create directory {0}, {1}", directoryInfo.FullName, e);
+                }
+                if (new DirectoryInfo(path).Exists)
+                {
+                    SLog.DebugFormat("Directory {0} successfully created", directoryInfo.Name);
+                }
+                else
+                {
+                    SLog.ErrorFormat("Directory {0} NOT created", directoryInfo.FullName);
+                }
+            }
+            else
+            {
+                SLog.DebugFormat("Directory {0} already exists",directory);
+            }
+        }
+        #endregion
     }
 }
