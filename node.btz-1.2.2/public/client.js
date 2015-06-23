@@ -1,32 +1,29 @@
 $(document).ready(function(){
+	
 	// WebSocket
 	var socket = io.connect();
 	// neue Nachricht
-	socket.on('Lenkung', function (data) {
-		$('#LenkungMax').val(data.LenkMax);
-		$('#LenkungMin').val(data.LenkMin);
-		$('#LenkungCenter').val(data.LenkCenter);
-		$('#LenkungMaxLabel').text(data.LenkMax);
-		$('#LenkungMinLabel').text(data.LenkMin);
-		$('#LenkungCenterLabel').text(data.LenkCenter);
+	socket.on('SteeringConfig', function (data) {
+		$('#LenkungMax').val(data.SteeringRangeMax);
+		$('#LenkungMaxLabel').text(data.SteeringRangeMax);
+		
+		$('#LenkungMin').val(data.SteeringRangeMin);
+		$('#LenkungMinLabel').text(data.SteeringRangeMin);
+		
+		$('#LenkungCenter').val(data.SteeringCenter);
+		$('#LenkungCenterLabel').text(data.SteeringCenter);
+		
+		$('#toleranz').val(data.SteeringToleranz);
+		$('#toleranzLabel').text(data.SteeringToleranz);
 		
 	});
-			
-			
-	socket.on('LenkungSpeed', function (data) {
-		$('#LenkmotorSpeedMax').val(data.LenkSpeedMax);
-		$('#LenkmotorSpeedMin').val(data.LenkSpeedMin);
-		$('#LenkmotorSpeedMaxLabel').text(data.LenkSpeedMax);
-		$('#LenkmotorSpeedMinLabel').text(data.LenkSpeedMin);
+	
+	socket.on('SteeringMotorConfig', function (data) {
+		$('#LenkmotorSpeedMax').val(data.SteeringSpeedMax);
+		$('#LenkmotorSpeedMin').val(data.SteeringSpeedMin);
+		$('#LenkmotorSpeedMaxLabel').text(data.SteeringSpeedMax);
+		$('#LenkmotorSpeedMinLabel').text(data.SteeringSpeedMin);
 	});
-			
-	
-	socket.on('tol', function (data) {
-		$('#toleranz').val(data.tole);
-		$('#toleranzLabel').text(data.tole);
-	});
-	
-	
 /*
 	window.ondevicemotion = function(event) {  
     var accelerationX = event.accelerationIncludingGravity.x;  
@@ -41,47 +38,67 @@ $(document).ready(function(){
 			
 	
 	//Lenkung senden
-	function LenkungSenden(){
+	function SteeringConfig(){
 		// range auslesen 
-		console.log("Lenkung");
-		var LenkMax = $('#LenkungMax').val();
-		var LenkMin = $('#LenkungMin').val();
-		var LenkCenter = $('#LenkungCenter').val();
+	
+		var SteeringRangeMax = $('#LenkungMax').val();
+		var SteeringRangeMin = $('#LenkungMin').val();
+		var SteeringCenter = $('#LenkungCenter').val();
+		var SteeringToleranz = $('#toleranz').val();
 		// Socket senden 
-		socket.emit('Lenkung', { LenkMax: LenkMax, LenkMin: LenkMin, LenkCenter:LenkCenter });
-				
-		
+		socket.emit('SteeringConfig', { SteeringRangeMax: SteeringRangeMax, SteeringRangeMin: SteeringRangeMin, SteeringCenter:SteeringCenter, SteeringToleranz: SteeringToleranz  });
+			console.log("Lenkung");
 	}
 	
 	//Lenkung Speed Werte 
 	
-	function LenkungSpeedSenden(){
-		var LenkSpeedMax = $('#LenkmotorSpeedMax').val();
-		var LenkSpeedMin = $('#LenkmotorSpeedMin').val();
-		socket.emit('LenkungSpeed', { LenkSpeedMax: LenkSpeedMax, LenkSpeedMin: LenkSpeedMin });
+	function SteeringMotorConfig(){
+		var SteeringSpeedMax = $('#LenkmotorSpeedMax').val();
+		var SteeringSpeedMin = $('#LenkmotorSpeedMin').val();
+		socket.emit('SteeringMotorConfig', { SteeringSpeedMax: SteeringSpeedMax, SteeringSpeedMin: SteeringSpeedMin });
 	}
 	
-	function tol(){
+	function EngineConfig(){
+		// range auslesen
+		var EngineSpeedMax = $('#EngineSpeedMax').val();
+		var EngineSpeedStartMin = $('#EngineSpeedStartMin').val();
+		var EngineRampTime = $('#EngineRampTime').val();
+		
+		// Socket senden 
+		socket.emit('SteeringConfig', { EngineSpeedStartMin: EngineSpeedStartMin, EngineSpeedMax: EngineSpeedMax, EngineRampTime:EngineRampTime  });
+	}
+	
+	function StartService(){
 		var tole = $('#toleranz').val();
-		socket.emit('tol', { tole: tole });
+		socket.emit('StartService', { tole: tole });
 	}
 	
+	function StopService(){
+		var tole = $('#toleranz').val();
+		socket.emit('StopService', { tole: tole });
+	}
 	
-	function refresh(){
+	function SaveSettings(){
+		var tole = $('#toleranz').val();
+		socket.emit('SaveSettings', { tole: tole });
+	}
+	
+	function RestoreSettings(){
 		var ref = 1;
 		socket.emit('refresh', { ref: ref })
 	}
 	
-
 	// bei einem Klick
-	$('#refresh').click(refresh)
+	
+	
+	
 	
 		//Maus -- LenkungMax -----------------------------------------------------------------------------------------
 	$("#LenkungMax").mousedown(function(event){
 	    	interval = setInterval(function(){
 	        	$("#LenkungMaxLabel").html($("#LenkungMax").val());
 				var range_in = $("#LenkungMax").val();
-				LenkungSenden()
+				SteeringConfig()
 	    	},11);
 		});
 	$("#LenkungMax").mouseup(function(event){
@@ -93,7 +110,7 @@ $(document).ready(function(){
 			interval = setInterval(function(){
 				$("#LenkungMaxLabel").html($("#LenkungMax").val());
 				var range_in = $("#LenkungMax").val();
-				LenkungSenden()
+				SteeringConfig()
 		},11);
 	};
 	document.getElementById('LenkungMax').ontouchend = function (eve) {
@@ -107,7 +124,7 @@ $(document).ready(function(){
 	    	interval = setInterval(function(){
 	        	$("#LenkungMinLabel").html($("#LenkungMin").val());
 				var range_in = $("#LenkungMin").val();
-				LenkungSenden()
+				SteeringConfig()
 	    	},11);
 		});
 	$("#LenkungMin").mouseup(function(event){
@@ -119,7 +136,7 @@ $(document).ready(function(){
 			interval = setInterval(function(){
 				$("#LenkungMinLabel").html($("#LenkungMin").val());
 				var range_in = $("#LenkungMin").val();
-				LenkungSenden()
+				SteeringConfig()
 		},11);
 	};
 	document.getElementById('LenkungMin').ontouchend = function (eve) {
@@ -131,8 +148,8 @@ $(document).ready(function(){
 	    	interval = setInterval(function(){
 	        	$("#LenkungCenterLabel").html($("#LenkungCenter").val());
 				var range_in = $("#LenkungCenter").val();
-				LenkungSenden()
-				RangeControll()
+				SteeringConfig()
+				 
 	    	},11);
 		});
 	$("#LenkungCenter").mouseup(function(event){
@@ -144,8 +161,8 @@ $(document).ready(function(){
 			interval = setInterval(function(){
 				$("#LenkungCenterLabel").html($("#LenkungCenter").val());
 				var range_in = $("#LenkungCenter").val();
-				LenkungSenden()
-				RangeControll()
+				SteeringConfig()
+			
 		},11);
 	};
 	document.getElementById('LenkungCenter').ontouchend = function (eve) {
@@ -156,7 +173,7 @@ $(document).ready(function(){
 	$("#LenkmotorSpeedMax").mousedown(function(event){
 	    	interval = setInterval(function(){
 	        	$("#LenkmotorSpeedMaxLabel").html($("#LenkmotorSpeedMax").val());
-				LenkungSpeedSenden()
+				SteeringMotorConfig()
 	    	},11);
 		});
 	$("#LenkmotorSpeedMax").mouseup(function(event){
@@ -167,7 +184,7 @@ $(document).ready(function(){
 	document.getElementById('LenkmotorSpeedMax').ontouchstart = function (eve) {
 			interval = setInterval(function(){
 				$("#LenkmotorSpeedMaxLabel").html($("#LenkmotorSpeedMax").val());
-				LenkungSpeedSenden()
+				SteeringMotorConfig()
 		},11);
 	};
 	document.getElementById('LenkmotorSpeedMax').ontouchend = function (eve) {
@@ -178,7 +195,7 @@ $(document).ready(function(){
 	$("#LenkmotorSpeedMin").mousedown(function(event){
 	    	interval = setInterval(function(){
 	        	$("#LenkmotorSpeedMinLabel").html($("#LenkmotorSpeedMin").val());
-				LenkungSpeedSenden()
+				SteeringMotorConfig()
 	    	},11);
 		});
 	$("#LenkmotorSpeedMin").mouseup(function(event){
@@ -189,7 +206,7 @@ $(document).ready(function(){
 	document.getElementById('LenkmotorSpeedMin').ontouchstart = function (eve) {
 			interval = setInterval(function(){
 				$("#LenkmotorSpeedMinLabel").html($("#LenkmotorSpeedMin").val());
-				LenkungSpeedSenden()
+				SteeringMotorConfig()
 		},11);
 	};
 	document.getElementById('LenkmotorSpeedMin').ontouchend = function (eve) {
@@ -200,7 +217,7 @@ $(document).ready(function(){
 	$("#toleranz").mousedown(function(event){
 	    	interval = setInterval(function(){
 	        	$("#toleranzLabel").html($("#toleranz").val());
-				tol()
+				SteeringConfig()
 	    	},11);
 		});
 	$("#toleranz").mouseup(function(event){
@@ -211,18 +228,15 @@ $(document).ready(function(){
 	document.getElementById('toleranz').ontouchstart = function (eve) {
 			interval = setInterval(function(){
 				$("#toleranzLabel").html($("#toleranz").val());
-				tol()
+				SteeringConfig()
 		},11);
 	};
 	document.getElementById('toleranz').ontouchend = function (eve) {
 	clearInterval(interval);
 	};//touch -- toleranz ende ----------------------------------------------------------------------------------------
 
+
 	
-    
-   
-
-
 	
 	
 	

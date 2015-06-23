@@ -50,50 +50,64 @@ var x = 0;
 // Websocket
 io.sockets.on('connection', function (socket) {
 
-		io.sockets.emit('Lenkung', { LenkMax: x });				
+		io.sockets.emit('RestoreSettings', { LenkMax: x });	
+		
+		
+					
 		// der Client ist verbunden
-		socket.on('Lenkung', function (data) {
+		socket.on('SteeringConfig', function (data) {
 			// so wird dieser Text an alle anderen Benutzer gesendet
 			x = data.LenkMax;
 			
-			io.sockets.emit('Lenkung', { LenkMax: x, LenkMin: data.LenkMin, LenkCenter: data.LenkCenter });
+			io.sockets.emit('SteeringConfig', { SteeringRangeMax: data.SteeringRangeMax , SteeringRangeMin: data.SteeringRangeMin, SteeringCenter: data.SteeringCenter, SteeringToleranz: data.SteeringToleranz });
 			
 			console.log("Lenkung");
-			console.log("Lenkung Max : " + data.LenkMax);
-			console.log("Lenkung Min : " + data.LenkMin);
-			console.log("Lenkung Center : " + data.LenkCenter);
+			console.log("Lenkung Max : " + data.SteeringRangeMax);
+			console.log("Lenkung Min : " + data.SteeringRangeMin);
+			console.log("Lenkung Center : " + data.SteeringCenter);
 			console.log("");
-			
-			
-			
-			
-			
 		});
 		
 		
-		socket.on('LenkungSpeed', function (data) {
+		socket.on('SteeringMotorConfig', function (data) {
 			// so wird dieser Text an alle anderen Benutzer gesendet
-			io.sockets.emit('LenkungSpeed', { LenkSpeedMax: data.LenkSpeedMax, LenkSpeedMin: data.LenkSpeedMin });
-			
+			io.sockets.emit('SteeringMotorConfig', { SteeringSpeedMax: data.SteeringSpeedMax, SteeringSpeedMin: data.SteeringSpeedMin });
 			console.log("Lenkung Speed");
-			console.log("Lenkmotor Speed Max : " + data.LenkSpeedMax);
-			console.log("Lenkmotor Speed Min : " + data.LenkSpeedMin);
+			console.log("Lenkmotor Speed Max : " + data.SteeringSpeedMax);
+			console.log("Lenkmotor Speed Min : " + data.SteeringSpeedMin);
 			console.log("");
 
 		});
 		
-		
-		socket.on('tol', function (data) {
+		socket.on('EngineConfig', function (data) {
 			// so wird dieser Text an alle anderen Benutzer gesendet
-			io.sockets.emit('tol', { tole: data.tole });
-			console.log("Winkelgeber");
-			console.log("Lenkung Toleranz : " + data.tole);
+			io.sockets.emit('EngineConfig', { EngineSpeedStartMin: data.EngineSpeedStartMin, EngineSpeedMax: data.EngineSpeedMax, EngineRampTime: data.EngineRampTime });
+			console.log("Motor Speed");
+			console.log("Motor Start Speed Max : " + data.EngineSpeedStartMin);
+			console.log("Motor Speed Max : " + data.EngineSpeedMax);
+			console.log("Motor Start Rampe : " + data.EngineRampTime);
+			console.log("");
+
+		});
+		
+
+		socket.on('StartService', function (data) {
+			
+			io.sockets.emit('refresh', { ref: data.ref });
+			console.log(data.ref);
 			console.log("");
 			
-
 		});
 		
-		socket.on('refresh', function (data) {
+		socket.on('StopService', function (data) {
+			
+			io.sockets.emit('refresh', { ref: data.ref });
+			console.log(data.ref);
+			console.log("");
+			
+		});
+		
+		socket.on('SaveSettings', function (data) {
 			
 			io.sockets.emit('refresh', { ref: data.ref });
 			console.log(data.ref);
