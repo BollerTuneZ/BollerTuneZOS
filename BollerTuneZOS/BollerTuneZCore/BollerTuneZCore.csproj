@@ -36,6 +36,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Plugin\PluginLoader.cs" />
     <Compile Include="Processors\SteeringProcessor.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -64,6 +65,10 @@
       <Project>{80A624AE-E11C-4193-8F4B-73CE77C022A6}</Project>
       <Name>Data</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Plugin.Infrastructure\Plugin.Infrastructure.csproj">
+      <Project>{FB2C926F-E904-46C3-AB73-91B5FDAFC481}</Project>
+      <Name>Plugin.Infrastructure</Name>
+    </ProjectReference>
     <ProjectReference Include="Communication\Communication.csproj">
       <Project>{E8F26B21-5324-42FD-A4AC-6C183D590D8B}</Project>
       <Name>Communication</Name>
@@ -91,7 +96,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Config\" />
-    <Folder Include="Plugin\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

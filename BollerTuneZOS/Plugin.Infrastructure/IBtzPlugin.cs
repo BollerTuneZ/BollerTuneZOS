@@ -10,6 +10,10 @@ namespace Plugin.Infrastructure
     public interface IBtzPlugin
     {
         /// <summary>
+        /// BollerTuneZ Server host connection
+        /// </summary>
+        IBtzPluginHost Host { get; set; }
+        /// <summary>
         /// Gibt die Identität des plugins zurück
         /// returns the identity of the plugin
         /// </summary>
@@ -22,6 +26,17 @@ namespace Plugin.Infrastructure
         /// </summary>
         /// <returns></returns>
         bool Initialize();
+
+        /// <summary>
+        /// Will be triggered as soon as the host wants to start the plugin
+        /// </summary>
+        void OnStart();
+
+        /// <summary>
+        /// Will be fired when the host wants to stop the plugin
+        /// (It will be stopped if you want or not ;) )
+        /// </summary>
+        void OnStop();
 
         /// <summary>
         /// Beendet das Plugin

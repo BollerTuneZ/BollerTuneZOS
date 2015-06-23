@@ -60,6 +60,7 @@
   <ItemGroup>
     <Compile Include="Addon\PluginSettingsRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\PluginRepository.cs" />
     <Compile Include="Repositories\SettingsRepository.cs" />
     <Compile Include="Util\FileHelper.cs" />
   </ItemGroup>

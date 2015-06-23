@@ -21,6 +21,6 @@ namespace Infrastructure.Plugin
         /// Closes plugin
         /// </summary>
         /// <param name="plugin"></param>
-        void ClosePlugin(IBtzPlugin plugin);
+        void ClosePlugin(string plugin);
     }
 }
