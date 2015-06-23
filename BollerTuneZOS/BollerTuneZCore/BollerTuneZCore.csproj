@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProjectGuid>{E714B849-0984-42FC-977C-0B812DD2F71A}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>BollerTuneZCore</RootNamespace>
+    <AssemblyName>BollerTuneZCore</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\bin\</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Externalconsole>true</Externalconsole>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\bin\</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Externalconsole>true</Externalconsole>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="log4net">
+      <HintPath>Lib\log4net.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Processors\SteeringProcessor.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Res\CoreRes.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CoreRes.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Testing.cs" />
+    <Compile Include="BootStrapper.cs" />
+    <Compile Include="Processors\SteeringProcessorOld.cs" />
+    <Compile Include="Main.cs" />
+    <Compile Include="Properties\Version.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Version.settings</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <ProjectReference Include="..\DataAccess\DataAccess.csproj">
+      <Project>{9d69f92c-758f-4cb9-beaa-6cd929f1f4eb}</Project>
+      <Name>DataAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Data\Data.csproj">
+      <Project>{80A624AE-E11C-4193-8F4B-73CE77C022A6}</Project>
+      <Name>Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="Communication\Communication.csproj">
+      <Project>{E8F26B21-5324-42FD-A4AC-6C183D590D8B}</Project>
+      <Name>Communication</Name>
+    </ProjectReference>
+    <ProjectReference Include="Communication.Infrastructure\Communication.Infrastructure.csproj">
+      <Project>{5A482D12-1CF1-4BC9-ADFE-8D63E1E69D99}</Project>
+      <Name>Communication.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="Infrastructure\Infrastructure.csproj">
+      <Project>{941264CC-5E1C-4BA8-A441-CEF9B7159CAF}</Project>
+      <Name>Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="SerializationLib\SerializationLib.csproj">
+      <Project>{D20E1E74-D7DF-4D2B-A301-B49D0A85FBD0}</Project>
+      <Name>SerializationLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="Testing\Testing.csproj">
+      <Project>{9FB644CF-248A-4D80-A499-920548E3ABC3}</Project>
+      <Name>Testing</Name>
+    </ProjectReference>
+    <ProjectReference Include="JoystickApi\JoystickApi.csproj">
+      <Project>{A597448B-594B-4E9F-B07B-5C6E1ED8E7F7}</Project>
+      <Name>JoystickApi</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Config\" />
+    <Folder Include="Plugin\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="Properties\Version.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Version.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Res\CoreRes.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>CoreRes.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+</Project>
