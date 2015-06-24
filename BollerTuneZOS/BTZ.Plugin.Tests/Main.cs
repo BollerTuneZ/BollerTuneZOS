@@ -14,6 +14,7 @@ namespace BTZ.Plugin.Tests
         private static PluginIdentity _identity;
         public IBtzPluginHost Host { get; set; }
         private IPluginSettingsRepository _settingsRepository;
+        readonly Random _r = new Random();
 
         public Main()
         {
@@ -50,7 +51,8 @@ namespace BTZ.Plugin.Tests
             var message = String.Format(
                 "{0}", settings.SteeringMax);
             Console.WriteLine(message);
-            settings.SteeringMax = 999999;
+            settings.SteeringMax = GetRandomInt();
+            Console.WriteLine("SteeringMax is now {0}",settings.SteeringMax);
             _settingsRepository.SaveSteeringSettings(settings);
             settings = _settingsRepository.LoadSteeringSettings();
             message = String.Format(
@@ -66,6 +68,17 @@ namespace BTZ.Plugin.Tests
         public void Dispose()
         {
             throw new NotImplementedException();
+        }
+
+        int GetRandomInt()
+        {
+
+            int rInt = _r.Next(-12345, 723943); //for ints
+
+            return rInt;
+            //int range = 100;
+            //double rDouble = _r.NextDouble() * range; //for doubles
+
         }
     }
 }

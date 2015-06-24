@@ -150,7 +150,8 @@ namespace BollerTuneZCore.Plugin
 
         public IPluginSettingsRepository GetSettingsRepository()
         {
-            return TinyIoC.TinyIoCContainer.Current.Resolve<IPluginSettingsRepository>();
+            var repo = TinyIoC.TinyIoCContainer.Current.Resolve<IPluginSettingsRepository>();
+            return repo;
         }
     }
 }

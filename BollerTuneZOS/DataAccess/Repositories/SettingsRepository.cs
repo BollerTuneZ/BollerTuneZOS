@@ -36,6 +36,7 @@ namespace DataAccess.Repositories
             SLog.Debug("Writing Steering Settings");
             var serialized = JsonConvert.SerializeObject(settings);
             _fileHelper.WriteSettingsFile(serialized);
+            RefreshSteeringSettings();
         }
 
         private void RefreshSteeringSettings()

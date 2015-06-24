@@ -47,6 +47,7 @@ namespace BollerTuneZCore
             TinyIoCContainer.Current.Register<IPluginRepository, PluginRepository>().AsSingleton();
             TinyIoCContainer.Current.Register<IPluginLoader, PluginLoader>().AsSingleton();
             TinyIoCContainer.Current.Register<IPluginSettingsRepository, PluginSettingsRepository>().AsMultiInstance();
+            TinyIoCContainer.Current.Register<IPluginManager, PluginManager>().AsSingleton();
 			TinyIoCContainer.Current.Register<BollerTuneZCore.Main> ();
 		}
 	}

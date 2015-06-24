@@ -25,7 +25,7 @@ namespace BollerTuneZCore.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("1.3.0")]
+        [global::System.Configuration.DefaultSettingValueAttribute("1.3.1")]
         public string VersionName {
             get {
                 return ((string)(this["VersionName"]));
@@ -34,7 +34,7 @@ namespace BollerTuneZCore.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        [global::System.Configuration.DefaultSettingValueAttribute("2")]
         public int VersionNumber {
             get {
                 return ((int)(this["VersionNumber"]));

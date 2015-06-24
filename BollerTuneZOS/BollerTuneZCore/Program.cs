@@ -25,19 +25,6 @@ namespace BollerTuneZCore
 			Main programm = TinyIoC.TinyIoCContainer.Current.Resolve<BollerTuneZCore.Main> ();
 			Console.WriteLine ("Going to run");
 			programm.Run ();
-			//CommunicationTest testing = new CommunicationTest();
-			//testing.RunTests ();
-			Console.ReadKey ();
-			/*
-			JoyStickTesting testing = TinyIoC.TinyIoCContainer.Current.Resolve<JoyStickTesting> ();
-
-			/*
-			Console.WriteLine ("Hello World!");
-			new Thread (() => {
-				Testing testing = new Testing();
-				testing.Run();
-			});
-*/
 		}
 		public static void Setup()
 		{

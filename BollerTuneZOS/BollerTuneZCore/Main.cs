@@ -61,9 +61,16 @@ namespace BollerTuneZCore
 	    }
 
 	    public void Run(string[] args= null)
-		{
-            _args = new List<BtzArgument>();
+        {
+            SLog.InfoFormat("{0} {1} started", Properties.Version.Default.ApplicationName, Properties.Version.Default.VersionName);
+            Console.WriteLine("{0} {1}", Properties.Version.Default.ApplicationName, Properties.Version.Default.VersionName);
+            #region const commands
 
+	        const string cInitServer = "-run -service default";
+	        const string cShutDown = "-shutdown";
+	        const string cPlugin = "-pm";
+            #endregion  
+            _args = new List<BtzArgument>();
 	        if (args != null)
 	        {
 	            foreach (var s in args)
@@ -75,29 +82,50 @@ namespace BollerTuneZCore
 	                }
 	            }
 	        }
-	        Console.Write(String.Format("{0} \n{1}", Properties.Version.Default.ApplicationName,
-	            Properties.Version.Default.VersionName));
-			Thread.Sleep (2000);
+	        bool run = true;
 	        while (true)
 	        {
+                Console.WriteLine("Write command: {0},{1},{2}",
+                cInitServer,
+                cPlugin,
+                cShutDown);
 	            var input = Console.ReadLine().ToLower();
 	            switch (input)
 	            {
-                    case "init -server":
+                    case cInitServer:
                         Initialize();
                         break;
-                    case "plugin -load -a":
-                        LoadAllPlugins();
+                    case cPlugin:
+	                    var pluginManager = TinyIoC.TinyIoCContainer.Current.Resolve<IPluginManager>();
+                        pluginManager.EnterPluginManager();
                         break;
-                    case "plugin -i":
-                        InstallPlugin();
-                        break;
-                    case "plugin -run":
-                        RunPlugin();
+                    case cShutDown:
+	                    run = false;
                         break;
                     default:
                         Console.WriteLine(String.Format("Unknown Command {0}",input));
                         break;
+	            }
+	            if (!run)
+	            {
+	                Console.WriteLine("Do you really want to shutdown ? Y/N");
+	                var input2 = Console.ReadLine();
+                    if (String.IsNullOrWhiteSpace(input2)) return;
+                    if (input2.ToLower() != "y")
+	                {
+                        Console.WriteLine("Shutdown abourted");
+	                    run = true;
+	                }
+	                if (!run)
+	                {
+                        SLog.Info("BollerTuneZ OS is going to shutdown..");
+                        for (int i = 3; i >= 0; i--)
+                        {
+                            Console.WriteLine("Shutdown in {0} seconds.", i);
+                            Thread.Sleep(1000);
+                        }
+                        break;
+	                }
 	            }
 	        }
 		}
