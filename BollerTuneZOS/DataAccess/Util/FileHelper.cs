@@ -30,13 +30,14 @@ namespace DataAccess.Util
 
         public void WritePluginList(string content)
         {
-            var filePath = String.Format(Environment.CurrentDirectory, PluginListFilePath);
+            var filePath = String.Format("{0}{1}", Environment.CurrentDirectory, PluginListFilePath);
             WriteFile(filePath,content);
         }
 
         public string ReadPluginList()
         {
-            return ReadFile(String.Format(Environment.CurrentDirectory, PluginListFilePath));
+            var path = String.Format("{0}{1}",Environment.CurrentDirectory, PluginListFilePath);
+            return ReadFile(path);
         }
 
         public string CopyPluginDirectory(string source,string name)

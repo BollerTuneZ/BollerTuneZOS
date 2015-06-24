@@ -7,7 +7,7 @@
 		<script src="socket.io/socket.io.js"></script>
 		<script src="jquery.min.js"></script>
 		<script src="client.js"></script>
-		
+		<script src="engine.js"></script>
 		
 		<!-- Das neueste kompilierte und minimierte CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
@@ -72,6 +72,53 @@
 		
 		
 	<div class="container" style="padding-top: 100px">
+	
+			<div class="col-sm-12 col-xs-12 col-md-6 col-lg-4">
+				<div class="panel panel-default">	
+				
+					<div class="center-block col-md-12">
+					
+						<center><h2>Motor Konfiguration</h2></center>
+						
+						<div class="panel">
+							
+							<div class="col-sx-3 col-sm-3 col-md-6 col-lg-6 ">
+							<p>Motor Maximal Geschwindigkeit </p>	
+							</div>
+							<div class="col-sx-3 col-sm-3 col-md-6 col-lg-6"
+							<label id="EngineSpeedMaxLabel">0</label> 
+							</div>
+							<input id="EngineSpeedMax" type="range"  min="0" max="255"/>
+						</div>
+						
+						<div class="panel ">
+							<div class="col-sx-3 col-sm-3 col-md-6 col-lg-6 ">
+							<p>Motor Min Start Frequenz </p>	
+							</div>
+							<div class="col-sx-3 col-sm-3 col-md-6 col-lg-6"
+							<label id="EngineSpeedStartMinLabel">0</label> 
+							</div>
+							<input id="EngineSpeedStartMin" type="range"  min="0" max="60"/>	
+						</div>
+							
+							
+							
+						<div class="panel">
+							
+							<div class="col-sx-3 col-sm-3 col-md-6 col-lg-6 ">
+							<p>Motor Start Rampe </p>	
+							</div>
+							<div class="col-sx-3 col-sm-3 col-md-6 col-lg-6"
+							<label id="EngineRampTimeLabel">0</label> 
+							</div>
+							<input id="EngineRampTime" type="range"  min="0" max="255"/>
+						</div>
+						
+					</div>
+				</div>
+		</div>	
+			
+	
 		
 			<div class="col-sm-12 col-xs-12 col-md-6 col-lg-4">
 				<div class="panel panel-default">	
@@ -118,8 +165,7 @@
 				</div>
 		</div>
 		
-		
-		<div class="col-sm-12 col-xs-12 col-md-6 col-lg-4">
+			<div class="col-sm-12 col-xs-12 col-md-6 col-lg-4">
 				<div class="panel panel-default">	
 					<div class="center-block col-md-12 col-lg-12">
 					<center><h2>Lenkmotor Speed</h2></center>
@@ -148,27 +194,14 @@
 						<p>Geber 2</p>	
 						<input id="Geber2" type="range" value="0" min="0" max="7000"/>
 						
-						X : <span id="varx"></span><br>
-						Y : <span id="vary"></span><br>
-						Z : <span id="varz"></span><br>
 						
-						<script>
-						    window.ondevicemotion = function(event){
-						        var accelerationX = event.accelerationIncludingGravity.x;
-						        var accelerationY = event.accelerationIncludingGravity.y;
-						        var accelerationZ = event.accelerationIncludingGravity.z;
-						
-						        document.getElementById("varx").innerHTML = accelerationX;
-						        document.getElementById("vary").innerHTML = accelerationY;
-						        document.getElementById("varz").innerHTML = accelerationZ;
-						    };
-						</script>
 					</div>
 				</div>
 		</div>	
 		
 	</div>	
-	
+						
+				
 	
 	
 	
@@ -184,4 +217,16 @@ LenkungCenter int
 LenkmotorSpeedMin int
 LenkmotorSpeedMax int
 toleranz 0-100%
+
+
+
+
+
+
+
+
+
+
+
+
 -->

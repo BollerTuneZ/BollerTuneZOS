@@ -6,13 +6,16 @@ using BollerTuneZCore.Res;
 using Communication.Infrastructure;
 using Communication.Infrastructure.MessageProcessor;
 using Communication.Serial;
+using Data.Plugin;
 using Data.Settings;
 using Infrastructure;
 using Infrastructure.Communication;
+using Infrastructure.Data;
 using Infrastructure.Data.Settings;
 using Infrastructure.JoystickApi;
 using Infrastructure.JoystickApi.JoyStickEventArgs;
 using Infrastructure.Main;
+using Infrastructure.Plugin;
 using Infrastructure.Util;
 using log4net;
 using System.Threading;
@@ -30,6 +33,8 @@ namespace BollerTuneZCore
 	    private readonly IBTZJoyStickController _joyStickController;
 	    private readonly ISerialDeviceHelper _serialDeviceHelper;
 	    private readonly IArgumentTranslator _argumentTranslator;
+	    private readonly IPluginLoader _pluginLoader;
+	    private readonly IPluginRepository _pluginRepository;
 	    private List<BtzArgument> _args;
         BtzArgument _networkType;
 	    private IBTZSocket _steeringSocket;
@@ -41,7 +46,9 @@ namespace BollerTuneZCore
             ISerialDeviceHelper serialDeviceHelper,
             IArgumentTranslator argumentTranslator,
             IBTZJoyStickController joyStickController,
-            ISettingsRepository settingsRepository)
+            ISettingsRepository settingsRepository,
+            IPluginLoader pluginLoader,
+            IPluginRepository pluginRepository)
 	    {
 	        _steeringProcessor = steeringProcessor;
 	        _engineProcessor = engineProcessor;
@@ -49,6 +56,8 @@ namespace BollerTuneZCore
 	        _argumentTranslator = argumentTranslator;
 	        _joyStickController = joyStickController;
 	        _settingsRepository = settingsRepository;
+	        _pluginLoader = pluginLoader;
+	        _pluginRepository = pluginRepository;
 	    }
 
 	    public void Run(string[] args= null)
@@ -69,10 +78,27 @@ namespace BollerTuneZCore
 	        Console.Write(String.Format("{0} \n{1}", Properties.Version.Default.ApplicationName,
 	            Properties.Version.Default.VersionName));
 			Thread.Sleep (2000);
-			Initialize ();
 	        while (true)
 	        {
-	            var input = Console.ReadLine();
+	            var input = Console.ReadLine().ToLower();
+	            switch (input)
+	            {
+                    case "init -server":
+                        Initialize();
+                        break;
+                    case "plugin -load -a":
+                        LoadAllPlugins();
+                        break;
+                    case "plugin -i":
+                        InstallPlugin();
+                        break;
+                    case "plugin -run":
+                        RunPlugin();
+                        break;
+                    default:
+                        Console.WriteLine(String.Format("Unknown Command {0}",input));
+                        break;
+	            }
 	        }
 		}
 
@@ -238,6 +264,95 @@ namespace BollerTuneZCore
             }
         }
         #endregion
-	}
+        #region Member
+
+        #region plugin
+
+	    void RunPlugin()
+	    {
+            Console.WriteLine("Type in the name of plugin for running");
+	        var input = Console.ReadLine();
+	        if (String.IsNullOrWhiteSpace(input))
+	        {
+	            SLog.Warn("Bad Userinput");
+                return;
+	        }
+	        var plugin = _pluginLoader.LoadBtzPlugins().FirstOrDefault(n => n.GetIdentity().Name.ToLower().Equals(input.ToLower()));
+	        if (plugin == null)
+	        {
+	            Console.WriteLine("Could not find plugin with name:{0}",input);
+                return;
+	        }
+            _pluginLoader.StartPlugin(plugin);
+	    }
+
+        void LoadAllPlugins()
+	    {
+	        var plugins = _pluginLoader.LoadBtzPlugins();
+	        foreach (var btzPlugin in plugins)
+	        {
+	            var tempIdentity = btzPlugin.GetIdentity();
+	            var tempMessage = String.Format("Plugin: \n Name:{0} \n Author:{1} \n Version:{2}", tempIdentity.Name,
+	                tempIdentity.Author, tempIdentity.VersionName);
+                Console.WriteLine(tempMessage);
+	        }
+        }
+
+	    void InstallPlugin()
+	    {
+	        const string patternInstall = "<pluginName>%<pluginDirectory>%<executiveLibrary>";
+            Console.WriteLine("Use pattern {0} to install plugin",patternInstall);
+
+	        while (true)
+	        {
+	            var input = Console.ReadLine();
+	            if (String.IsNullOrWhiteSpace(input))
+	            {
+	                SLog.Error("Userinput was NULL/Empty");
+                    continue;
+	            }
+	            var split = input.Split('%');
+	            if (split.Count() < 3)
+	            {
+                    SLog.ErrorFormat("Userinput was Invalid {0}, should be {1}",input,patternInstall);
+	                continue;
+	            }
+	            var name = split[0];
+                var dir = split[1];
+                var executiveLib = split[2];
+                
+                Console.WriteLine(String.Format("Name:{0} \n Directory:{1} \n ExecutiveLibrary:{2}",name,dir,executiveLib));
+                Console.WriteLine("Are these information correct ? Y/N");
+	            input = Console.ReadLine();
+                if (String.IsNullOrWhiteSpace(input))
+                {
+                    SLog.Error("Userinput was NULL/Empty");
+                    continue;
+                }
+                if (input.ToLower() != "y")
+                {
+                    Console.WriteLine("Use pattern {0} to install plugin", patternInstall);
+                    continue;
+                }
+	            var tempPluginInfo = new PluginInfo
+	            {
+	                Name = name,
+	                PluginLocation = dir,
+	                ExecutiveLibrary = executiveLib
+	            };
+                if (!_pluginRepository.InstallPlugin(tempPluginInfo, dir))
+	            {
+	                SLog.WarnFormat("Plugin {0} could not be installed",name);
+                    Console.WriteLine("Plugin {0} could not be installed",name);
+	            }
+                else
+                {
+                    Console.WriteLine("Plugin {0} installed",name);
+                }
+	        }
+	    }
+        #endregion
+        #endregion
+    }
 }
 

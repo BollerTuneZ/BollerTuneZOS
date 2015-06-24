@@ -65,6 +65,10 @@
       <Project>{80A624AE-E11C-4193-8F4B-73CE77C022A6}</Project>
       <Name>Data</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Plugin.Data\Plugin.Data.csproj">
+      <Project>{f9c0771d-6b87-4607-8fd4-32d4670e9e93}</Project>
+      <Name>Plugin.Data</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Plugin.Infrastructure\Plugin.Infrastructure.csproj">
       <Project>{FB2C926F-E904-46C3-AB73-91B5FDAFC481}</Project>
       <Name>Plugin.Infrastructure</Name>
