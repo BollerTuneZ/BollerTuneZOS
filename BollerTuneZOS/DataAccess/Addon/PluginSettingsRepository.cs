@@ -26,15 +26,12 @@ namespace DataAccess.Addon
             Mapper.CreateMap<SteeringSettings, PluginSteeringSettings>();
             Mapper.CreateMap<PluginSteeringSettings, SteeringSettings>();
         }
-
-
         public PluginSteeringSettings LoadSteeringSettings()
         {
             SLog.Debug("Plugin is loading SteeringSettings");
             var settings = Mapper.Map<SteeringSettings, PluginSteeringSettings>(_setiingsRepository.RetriveSteeringSettings());
             return settings;
         }
-
         public bool SaveSteeringSettings(PluginSteeringSettings settings)
         {
             var mappedSettings = Mapper.Map<PluginSteeringSettings, SteeringSettings>(settings);
