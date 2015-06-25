@@ -51,6 +51,10 @@
     <Folder Include="Util\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Data\Data.csproj">
+      <Project>{80A624AE-E11C-4193-8F4B-73CE77C022A6}</Project>
+      <Name>Data</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Communication.Infrastructure\Communication.Infrastructure.csproj">
       <Project>{5A482D12-1CF1-4BC9-ADFE-8D63E1E69D99}</Project>
       <Name>Communication.Infrastructure</Name>

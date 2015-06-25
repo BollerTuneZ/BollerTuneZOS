@@ -36,12 +36,13 @@ namespace BTZ.Plugin.WebInterface
 
         public bool Initialize()
         {
-            _settingsService = new SettingsService();
+            _settingsService = new SettingsService(Host.GetSettingsRepository());
             return true;
         }
 
         public void OnStart()
         {
+            Console.WriteLine("Starting SettingsService");
             _settingsService.Start();
         }
 

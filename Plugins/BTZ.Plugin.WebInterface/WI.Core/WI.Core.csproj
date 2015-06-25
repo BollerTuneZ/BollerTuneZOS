@@ -37,6 +37,12 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="Plugin.Data">
+      <HintPath>..\..\..\BollerTuneZOS\bin\Plugin.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Plugin.Infrastructure">
+      <HintPath>..\..\..\BollerTuneZOS\bin\Plugin.Infrastructure.dll</HintPath>
+    </Reference>
     <Reference Include="SocketIoClientDotNet">
       <HintPath>..\packages\SocketIoClientDotNet.0.9.10\lib\net45\SocketIoClientDotNet.dll</HintPath>
     </Reference>

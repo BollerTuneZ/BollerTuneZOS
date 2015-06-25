@@ -15,7 +15,9 @@ namespace DataAccess.Util
     internal class FileHelper
     {
         private static readonly ILog SLog = LogManager.GetLogger(typeof (FileHelper));
-        private const string SettingsFilePath = @"\Settings\settings.btz";
+        private const string SteeringSettingsFilePath = @"\Settings\settings_steering.btz";
+        private const string EngineSettingsFilePath = @"\Settings\settings_engine.btz";
+
         private const string PluginListFilePath = @"\Plugin\pluginList.btz";
         private const string SettingsDirectory = @"\Settings";
         private const string PluginDirectory = @"\Plugin";
@@ -57,18 +59,34 @@ namespace DataAccess.Util
         }
         #endregion
 
-        #region SettingsFile
-        public void WriteSettingsFile(string content)
+        #region SteeringSettingsFile
+        public void WriteSteeringSettingsFile(string content)
         {
             var currentDirectory = Environment.CurrentDirectory;
-            var filePath = String.Format("{0}{1}", currentDirectory, SettingsFilePath);
+            var filePath = String.Format("{0}{1}", currentDirectory, SteeringSettingsFilePath);
             WriteFile(filePath,content);
         }
 
-        public string ReadSettingsFile()
+        public string ReadSteeringSettingsFile()
         {
             var currentDirectory = Environment.CurrentDirectory;
-            var filePath = String.Format("{0}{1}",currentDirectory, SettingsFilePath);
+            var filePath = String.Format("{0}{1}", currentDirectory, SteeringSettingsFilePath);
+            return ReadFile(filePath);
+        }
+        #endregion
+
+        #region Engine Settings
+        public void WriteEngineSettingsFile(string content)
+        {
+            var currentDirectory = Environment.CurrentDirectory;
+            var filePath = String.Format("{0}{1}", currentDirectory, EngineSettingsFilePath);
+            WriteFile(filePath, content);
+        }
+
+        public string ReadEngineSettingsFile()
+        {
+            var currentDirectory = Environment.CurrentDirectory;
+            var filePath = String.Format("{0}{1}", currentDirectory, EngineSettingsFilePath);
             return ReadFile(filePath);
         }
         #endregion

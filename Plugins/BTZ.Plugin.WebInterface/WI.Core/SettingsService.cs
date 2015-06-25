@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using Plugin.Data;
+using Plugin.Infrastructure.API.DataAccess;
 using WebSocket4Net;
 using WI.Data;
 using WI.Infrastructure.Services;
@@ -15,14 +17,27 @@ namespace WI.Core
     /// </summary>
     public class SettingsService : IService
     {
-
+        //SaveSettings
+        private PluginSteeringSettings _steeringSettingsRemote;
         private static Socket _socket;
         private Action<object> _actionSteeringConfig;
+        private Action<object> _actionSteeringMotorConfig;
+        private Action<object> _actionEngineConfig;
+        private Action<object> _actionSaveSettings;
         private SteeringConfigDto _steeringDto;
+        private SteeringMotorConfigDto _steeringMotorConfig;
+        private EngineConfigDto _engineConfig;
+        private IPluginSettingsRepository _settingsRepository;
+
+        public SettingsService(IPluginSettingsRepository settingsRepository)
+        {
+            _settingsRepository = settingsRepository;
+        }
 
         public void Start()
         {
             Initialize();
+            Console.WriteLine("SettingsService Initialized");
         }
 
         public void Stop()
@@ -32,21 +47,84 @@ namespace WI.Core
 
         void Initialize()
         {
+            _steeringSettingsRemote = _settingsRepository.LoadSteeringSettings();
             _socket = IO.Socket("http://192.168.2.118:8080");
             _socket.On(Socket.EVENT_ERROR, (data) => Console.WriteLine("WebInterface Socket Error {0}",data));
-            EventSteeringConfig();
-        }
-
-
-        void EventSteeringConfig()
-        {
             _actionSteeringConfig = OnSteeringConfig;
             _socket.On("SteeringConfig", _actionSteeringConfig);
+            _actionSteeringMotorConfig = OnSteeringMotorConfig;
+            _socket.On("SteeringMotorConfig", _actionSteeringMotorConfig);
+            _actionEngineConfig = OnEngineConfig;
+            _socket.On("EngineConfig", _actionEngineConfig);
+            _actionSaveSettings = OnSettingsSave;
+        }
+
+        void SaveSteeringSettings()
+        {
+            _steeringSettingsRemote.SteeringCenter = _steeringDto.SteeringCenter;
+            _steeringSettingsRemote.SteeringMax = _steeringDto.SteeringRangeMax;
+            _steeringSettingsRemote.SteeringMin = _steeringDto.SteeringRangeMin;
+            _steeringSettingsRemote.SteeringPositionDiffTolerance = _steeringDto.SteeringToleranz;
+            _settingsRepository.SaveSteeringSettings(_steeringSettingsRemote);
+        }
+        
+        private void OnSettingsSave(object o)
+        {
+            SaveSteeringSettings();
+            _settingsRepository.SaveSteeringSettings(_steeringSettingsRemote);
+        }
+
+        #region Config Events
+        private void OnEngineConfig(object o)
+        {
+            try
+            {
+                string configStr = Convert.ToString(o);
+                if (String.IsNullOrEmpty(configStr))
+                {
+                    Console.WriteLine("Error configStr is null");
+                    return;
+                }
+                _engineConfig = JsonConvert.DeserializeObject<EngineConfigDto>(configStr);
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+            if (_steeringMotorConfig == null)
+            {
+                Console.WriteLine("Error could not Deserialize steeringconfig ");
+                return;
+            }
+        }
+
+        private void OnSteeringMotorConfig(object o)
+        {
+            try
+            {
+                string configStr = Convert.ToString(o);
+                if (String.IsNullOrEmpty(configStr))
+                {
+                    Console.WriteLine("Error configStr is null");
+                    return;
+                }
+                _steeringMotorConfig = JsonConvert.DeserializeObject<SteeringMotorConfigDto>(configStr);
+                SaveSteeringSettings();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+            if (_steeringMotorConfig == null)
+            {
+                Console.WriteLine("Error could not Deserialize steeringconfig ");
+                return;
+            }
         }
 
         private void OnSteeringConfig(object o)
         {
-          
             try
             {
                 string configStr = Convert.ToString(o);
@@ -56,7 +134,7 @@ namespace WI.Core
                     return;
                 }
                 _steeringDto = JsonConvert.DeserializeObject<SteeringConfigDto>(configStr);
-
+                SaveSteeringSettings();
             }
             catch (Exception e)
             {
@@ -67,7 +145,7 @@ namespace WI.Core
                 Console.WriteLine("Error could not Deserialize steeringconfig ");
                 return;
             }
-            Console.WriteLine(String.Format("Settings changed to: {0},{1},{2}",  _steeringDto.SteeringRangeMax, _steeringDto.SteeringRangeMin, _steeringDto.SteeringCenter));
         }
+        #endregion
     }
 }

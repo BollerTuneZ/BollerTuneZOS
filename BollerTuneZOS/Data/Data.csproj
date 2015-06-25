@@ -47,6 +47,7 @@
     <Compile Include="Plugin\PluginInfo.cs" />
     <Compile Include="Plugin\PluginList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Settings\EngineSettings.cs" />
     <Compile Include="Settings\SteeringSettings.cs" />
     <Compile Include="Steering\Enums\SteeringDirection.cs" />
     <Compile Include="Steering\SteeringMovement.cs" />

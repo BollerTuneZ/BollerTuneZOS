@@ -11,6 +11,10 @@ namespace Infrastructure.Data.Settings
         //SteeringSettings
         SteeringSettings RetriveSteeringSettings();
         void SaveSteeringSettings(SteeringSettings settings);
+
+        //Engine
+        EngineSettings RetriveEngineSettings();
+        void SaveEngineSettings(EngineSettings settings);
     }
 
 }

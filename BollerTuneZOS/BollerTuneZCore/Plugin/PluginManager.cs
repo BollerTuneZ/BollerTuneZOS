@@ -141,6 +141,7 @@ namespace BollerTuneZCore.Plugin
                 else
                 {
                     Console.WriteLine("Plugin {0} installed", name);
+                    _plugins = _pluginLoader.LoadBtzPlugins();
                     break;
                 }
             }

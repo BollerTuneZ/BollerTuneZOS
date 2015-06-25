@@ -55,7 +55,7 @@ namespace BollerTuneZCore
 			consoleAppender.ActivateOptions ();
 			hierarchy.Root.AddAppender (consoleAppender);
 
-			hierarchy.Root.Level = Level.Info;
+			hierarchy.Root.Level = Level.All;
 			hierarchy.Configured = true;
 		}
 

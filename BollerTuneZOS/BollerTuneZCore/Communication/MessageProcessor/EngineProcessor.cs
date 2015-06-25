@@ -1,16 +1,20 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Threading;
 using System.Timers;
 using Communication.Infrastructure;
 using Communication.Infrastructure.MessageProcessor;
+using Data.Settings;
 using Infrastructure;
 using Infrastructure.Communication;
+using Infrastructure.Data.Settings;
 using log4net;
 
 namespace Communication.MessageProcessor
 {
 	public class EngineProcessor : IEngineProcessor
 	{
+	    private ISettingsRepository _settingsRepository;
 	    private static IBTZSocket _socket;
 	    private static readonly ILog SLog = LogManager.GetLogger(typeof (EngineProcessor));
 	    private Thread _driveThread;
@@ -20,7 +24,16 @@ namespace Communication.MessageProcessor
 	    private volatile bool _enabled = false;
 	    private volatile int _speed;
 	    private volatile byte _direction;
-        /*Constante*/
+	    private EngineSettings _settings;
+
+
+	    public EngineProcessor(ISettingsRepository settingsRepository)
+	    {
+	        _settingsRepository = settingsRepository;
+	        _settings = _settingsRepository.RetriveEngineSettings();
+	    }
+
+	    /*Constante*/
 	    private const byte DirectionForwards = 0x46;
         private const byte DirectionBackwards = 0x42;
         private const byte DirectionNon = 0x00;
@@ -103,7 +116,7 @@ namespace Communication.MessageProcessor
                 speedMessage = new byte[]
 	            {
                     SerialConstants.COMMAND_DRIVE_POWER,
-                    Convert.ToByte(_speed)
+                    Convert.ToByte(CalculateSpeed())
 	            };
 	        }
 	        lock (_directionLock)
@@ -116,6 +129,21 @@ namespace Communication.MessageProcessor
 	        }
 
             return new Tuple<byte[], byte[]>(speedMessage, directionMessage);
+	    }
+
+	    int CalculateSpeed()
+	    {
+	        if (_speed < _settings.EngineSpeedStartMin)
+	        {
+	            return 0;
+	        }else if (_speed > _settings.EngineSpeedMax)
+	        {
+	            return _settings.EngineSpeedMax;
+	        }
+	        else
+	        {
+	            return _speed;
+	        }
 	    }
 	}
 }
