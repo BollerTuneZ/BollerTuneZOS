@@ -6,7 +6,7 @@ namespace Infrastructure.JoystickApi
 	/// Abgewandelte klasse die IJoyStickHandler benötigt,
 	/// und nur relevante Daten liefert
 	/// </summary>
-	public interface IBTZJoyStickController
+	public interface IBtzJoyStickController
 	{
 	    //private const int MaximalValue = 32767;
 
@@ -20,7 +20,9 @@ namespace Infrastructure.JoystickApi
 
 		bool Initialize();
 
-		void Run();
+		void Start();
+
+	    void Stop();
 	}
 }
 

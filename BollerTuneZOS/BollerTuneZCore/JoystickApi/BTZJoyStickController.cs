@@ -5,7 +5,7 @@ using Infrastructure.JoystickApi.JoyStickEventArgs;
 
 namespace JoystickApi
 {
-	public class BTZJoyStickController : IBTZJoyStickController
+	public class BTZJoyStickController : IBtzJoyStickController
 	{
 		readonly IJoyStickHandler _joyStickHandler;
         private const int MaxValue = 32767;
@@ -51,11 +51,18 @@ namespace JoystickApi
 			return true;
 		}
 
-		public void Run ()
+		public void Start ()
 		{
-			_joyStickHandler.Run ();
+			_joyStickHandler.Start ();
 		}
-		#endregion
+
+	    public void Stop()
+	    {
+            _joyStickHandler.OnButtonTriggered -= OnJoyStickButtonTriggered;
+            _joyStickHandler.Stop();
+	    }
+
+	    #endregion
 
 
 		void ProcessEvent(JoyStickEventArgs args)
