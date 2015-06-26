@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Infrastructure
+namespace Infrastructure.JoystickApi
 {
 	/// <summary>
 	/// Empfängt Befehle vom Joystick
@@ -11,8 +11,9 @@ namespace Infrastructure
 
 		void Initialize();
 
-		void Run();
+		void Start();
 
+	    void Stop();
 	}
 }
 

@@ -55,6 +55,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plugin.Data", "Plugin.Data\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BTZ.Plugin.Test", "BTZ.Plugin.Tests\BTZ.Plugin.Test.csproj", "{C891AE92-597B-4FFE-BB21-97438CE0D286}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services", "Services\Services.csproj", "{9EA84C32-2410-4433-B0F6-4CE04882A359}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -341,6 +343,18 @@ Global
 		{C891AE92-597B-4FFE-BB21-97438CE0D286}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{C891AE92-597B-4FFE-BB21-97438CE0D286}.Release|Win32.ActiveCfg = Release|Any CPU
 		{C891AE92-597B-4FFE-BB21-97438CE0D286}.Release|x86.ActiveCfg = Release|Any CPU
+		{9EA84C32-2410-4433-B0F6-4CE04882A359}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9EA84C32-2410-4433-B0F6-4CE04882A359}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9EA84C32-2410-4433-B0F6-4CE04882A359}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{9EA84C32-2410-4433-B0F6-4CE04882A359}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{9EA84C32-2410-4433-B0F6-4CE04882A359}.Debug|Win32.ActiveCfg = Debug|Any CPU
+		{9EA84C32-2410-4433-B0F6-4CE04882A359}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{9EA84C32-2410-4433-B0F6-4CE04882A359}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9EA84C32-2410-4433-B0F6-4CE04882A359}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9EA84C32-2410-4433-B0F6-4CE04882A359}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{9EA84C32-2410-4433-B0F6-4CE04882A359}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{9EA84C32-2410-4433-B0F6-4CE04882A359}.Release|Win32.ActiveCfg = Release|Any CPU
+		{9EA84C32-2410-4433-B0F6-4CE04882A359}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -367,5 +381,6 @@ Global
 		{FB2C926F-E904-46C3-AB73-91B5FDAFC481} = {1C49E215-98CA-4308-940B-061A9E7899EF}
 		{F9C0771D-6B87-4607-8FD4-32D4670E9E93} = {1C49E215-98CA-4308-940B-061A9E7899EF}
 		{C891AE92-597B-4FFE-BB21-97438CE0D286} = {9D548224-C562-463F-B613-72CE78B85289}
+		{9EA84C32-2410-4433-B0F6-4CE04882A359} = {1C49E215-98CA-4308-940B-061A9E7899EF}
 	EndGlobalSection
 EndGlobal

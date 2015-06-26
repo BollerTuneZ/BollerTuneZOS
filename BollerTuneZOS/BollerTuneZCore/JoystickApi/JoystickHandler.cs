@@ -30,14 +30,19 @@ namespace JoystickApi
 			}
 		}
 
-		public void Run ()
+		public void Start ()
 		{
 			_joyStickServiceThread = new Thread (JoyStickService);
 			_joyStickServiceThread.Start ();
 		}
 
+	    public void Stop()
+	    {
+	        KeepRunning = false;
+            _joyStickServiceThread.Abort();
+	    }
 
-		#endregion
+	    #endregion
 
 		void JoyStickService()
 		{
@@ -81,6 +86,7 @@ namespace JoystickApi
 						//Console.WriteLine(String.Format("Button {0}, {1}",key,j.Button[key]));
 					}
 				}
+                fs.Close();
 			}
 		}
 
