@@ -19,6 +19,8 @@ app.configure(function(){
 	app.use(express.static(__dirname + '/public'));
 });
 
+
+
 // wenn der Pfad / aufgerufen wird
 app.get('/', function (req, res) {
 	// so wird die Datei index.html ausgegeben
@@ -91,27 +93,31 @@ io.sockets.on('connection', function (socket) {
 		});
 		
 
-		socket.on('StartService', function (data) {
+		socket.on('StartService', function() {
 			
-			io.sockets.emit('refresh', { ref: data.ref });
-			console.log(data.ref);
-			console.log("");
-			
-		});
-		
-		socket.on('StopService', function (data) {
-			
-			io.sockets.emit('refresh', { ref: data.ref });
-			console.log(data.ref);
-			console.log("");
+			io.sockets.emit('StartService');
+			console.log("StartService");
 			
 		});
 		
-		socket.on('SaveSettings', function (data) {
+		socket.on('StopService', function() {
+		
+			io.sockets.emit('StopService');
+			console.log("StopService");
 			
-			io.sockets.emit('refresh', { ref: data.ref });
-			console.log(data.ref);
-			console.log("");
+		});
+		
+		socket.on('SaveSettings', function() {
+			
+			io.sockets.emit('SaveSettings');
+			console.log("SaveSettings");
+			
+		});
+		
+		socket.on('RestoreSettings', function() {
+			
+			io.sockets.emit('RestoreSettings');
+			console.log("RestoreSettings");
 			
 		});
 	

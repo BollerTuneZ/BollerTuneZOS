@@ -3,38 +3,17 @@
 	<head>
 		<title>BollerTuneZ</title>
 		<meta charset="utf-8">
-		<link rel="stylesheet" href="style.css" />
+		<link rel="stylesheet" href="css/bootstrap.css">
 		<script src="socket.io/socket.io.js"></script>
 		<script src="jquery.min.js"></script>
 		<script src="client.js"></script>
-		<script src="js/gyro.js"></script>
-		
-		
-		<!-- Das neueste kompilierte und minimierte CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-
-<!-- Optionales Theme -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
-
-<!-- Das neueste kompilierte und minimierte JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>	</head>
-
-<meta charset="utf-8"/>
-  <title>Responsive Gauges</title>
+		<script src="engine.js"></script>
+		<script src="steering.js"></script>
+		<script src="js/bootstrap.js"></script>
   <meta name="viewport" content="width=device-width">
-
   <script src="../lib/jquery-1.7.2.min.js"></script>
-  <script type="text/javascript" src="lib/raphael.2.1.0.min.js"></script>
-  <script type="text/javascript" src="justgage.js"></script>
   <link href="styles.css" rel="stylesheet">
-
-  
-  
-
 </head>
-
-
-
 
 	<body>
 		<div class="navbar navbar-custom navbar-inverse navbar-static-top" id="nav">
@@ -63,6 +42,17 @@
           </li>
         </ul>
       </div><!--/.nav-collapse -->
+       <br>
+     <div class="btn-custom">
+     	<input id="StartService" class="btn btn-custom" type="button" value="Start" style="width: 100px ; height: 40px; "/>
+					
+		<input id="StopService" class="btn btn-custom" type="button" value="Stop" style="width: 100px ; height: 40px"/>
+					
+		<input id="SaveSettings" class="btn btn-custom" type="button" value="Speichern" style="width: 100px ; height: 40px"/>
+						
+		<input id="RestoreSettings" class="btn btn-custom" type="button" value="Neu Laden" style="width: 100px ; height: 40px"/>
+     </div>
+					<br>
     </div><!--/.container -->
 </div><!--/.navbar -->
 
@@ -72,39 +62,27 @@
            
 		
 		
-	<div class="container" style="padding-top: 100px">
+	<div class="container">
 		
 			<div class="col-sm-12 col-xs-12 col-md-6 col-lg-4">
 				<div class="panel panel-default">	
 				
 					<div class="center-block col-md-12">
 					
-						<center><h2>Lenkung</h2></center>
+						<center><h2>Steuerung</h2></center>
 						
 						<div class="panel">
+							<center>
+							<input id="w" type="button" value="13" style="width: 100px ; height: 100px"/>
+							</center>
+							<center>
+							<input id="a" type="button" style="width: 100px ; height: 100px"/>
+<input id="s" type="button"  style="width: 100px ; height: 100px"/>
+<input id="d" type="button"  style="width: 100px ; height: 100px"/>
+							</center></div>
 							
-							<div class="col-sx-3 col-sm-3 col-md-6 col-lg-6 ">
-							<p>Lenkung Max </p>	
-							</div>
-							<div class="col-sx-3 col-sm-3 col-md-6 col-lg-6"
-							<label id="LenkungMaxLabel">0</label> 
-							</div>
-							<input id="LenkungMax" type="range"  min="0" max="255"/>
-						</div>
-						
-						<div class="panel ">
-							<div class="col-sx-3 col-sm-3 col-md-6 col-lg-6 ">
-							<p>Lenkung Min </p>	
-							</div>
-							<div class="col-sx-3 col-sm-3 col-md-6 col-lg-6"
-							<label id="LenkungMinLabel">0</label> 
-							</div>
-							<input id="LenkungMin" type="range"  min="0" max="255"/>	
-						</div>
-							
-							
-							
-						<div class="panel">
+						<!--
+							<div class="panel">
 							
 							<div class="col-sx-3 col-sm-3 col-md-6 col-lg-6 ">
 							<p>Lenkung Center </p>	
@@ -114,6 +92,7 @@
 							</div>
 							<input id="LenkungCenter" type="range"  min="0" max="255"/>
 						</div>
+-->
 						
 					</div>
 				</div>
@@ -123,7 +102,7 @@
 		<div class="col-sm-12 col-xs-12 col-md-6 col-lg-4">
 				<div class="panel panel-default">	
 					<div class="center-block col-md-12 col-lg-12">
-					<center><h2>Lenkmotor Speed</h2></center>
+					<center><h2>Ein / Aus</h2></center>
 					<p>Lenkungmotor Speed Max </p>	
 					<input id="LenkmotorSpeedMax" type="range"  min="0" max="255"/>
 					<label id="LenkmotorSpeedMaxLabel">0</label>
