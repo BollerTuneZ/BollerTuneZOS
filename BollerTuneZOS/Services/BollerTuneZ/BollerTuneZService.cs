@@ -100,7 +100,6 @@ namespace Services.BollerTuneZ
         }
         #endregion
 
-
         #region Events
         private void OnSerialDeviceFound(object sender, EventArgs eventArgs)
         {
