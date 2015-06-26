@@ -43,12 +43,15 @@ namespace Services.BollerTuneZ
 
         public void Start()
         {
+            SLog.Debug("Start -> BollerTuneZ Service");
             Initialize();
         }
 
         public void Stop()
         {
-            throw new NotImplementedException();
+            SLog.Debug("Stop -> BollerTuneZ Service");
+            _engineProcessor.Stop();
+            _steeringProcessor.Stop();
         }
 
         #region Initialisation
@@ -56,7 +59,7 @@ namespace Services.BollerTuneZ
         {
             _serialDeviceHelper.OnDeviceFound += OnSerialDeviceFound;
             _networkType = BtzArgument.Serial;
-            SLog.Info("Waiting for sockets to connect");
+            SLog.Info("Waiting for Serial sockets to connect");
             while (!SocketsConnected)
             {
                 Thread.Sleep(100);
@@ -70,12 +73,15 @@ namespace Services.BollerTuneZ
             SLog.Debug("Init Processors");
             _steeringProcessor.Initialize(_steeringSocket);
             _engineProcessor.Initialize(_engineSocket);
-
-
+            if (!ConnectToJoystick())
+            {
+                SLog.Error("Could not connect to joystick");
+                return;
+            }
             SLog.Info("Service will now start");
-            _joyStickController.Run();
             _steeringProcessor.Start();
             _engineProcessor.Start();
+            _joyStickController.Run();
         }
 
         bool ConnectToJoystick()
