@@ -5,6 +5,7 @@
 */
 
 // the setup function runs once when you press reset or power the board
+#include "Log.h"
 #include "EngineHandler.h"
 #include "SerialCommunication.h"
 #include "Command.h"

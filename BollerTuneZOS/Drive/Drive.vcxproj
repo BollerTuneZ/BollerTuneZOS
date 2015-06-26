@@ -79,12 +79,14 @@
     <ClInclude Include="Config.h" />
     <ClInclude Include="Constants.h" />
     <ClInclude Include="EngineHandler.h" />
+    <ClInclude Include="Log.h" />
     <ClInclude Include="SerialCommunication.h" />
     <ClInclude Include="Visual Micro\.Drive.vsarduino.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Command.cpp" />
     <ClCompile Include="EngineHandler.cpp" />
+    <ClCompile Include="Log.cpp" />
     <ClCompile Include="SerialCommunication.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

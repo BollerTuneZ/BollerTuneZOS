@@ -81,6 +81,7 @@
     <ClInclude Include="Config.h">
       <FileType>CppCode</FileType>
     </ClInclude>
+    <ClInclude Include="Log.h" />
     <ClInclude Include="MotorHandler.h">
       <FileType>CppCode</FileType>
     </ClInclude>
@@ -93,6 +94,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Command.cpp" />
+    <ClCompile Include="Log.cpp" />
     <ClCompile Include="MotorHandler.cpp" />
     <ClCompile Include="SerialCommunication.cpp" />
     <ClCompile Include="SteeringHandler.cpp" />

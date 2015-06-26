@@ -91,6 +91,8 @@ extern "C" void __cxa_pure_virtual() {;}
 #include <Constants.h>
 #include <EngineHandler.cpp>
 #include <EngineHandler.h>
+#include <Log.cpp>
+#include <Log.h>
 #include <SerialCommunication.cpp>
 #include <SerialCommunication.h>
 #endif

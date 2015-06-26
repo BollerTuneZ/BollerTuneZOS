@@ -1,3 +1,4 @@
+#include "Log.h"
 #include <Encoder.h>
 #include "SteeringHandler.h"
 #include "MotorHandler.h"
