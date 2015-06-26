@@ -30,7 +30,7 @@ namespace BollerTuneZCore
 		readonly ISteeringProcessor _steeringProcessor;
 		readonly ISteeringConfigMessageProcessor _steeringConfigProcessor;
 		readonly IEngineProcessor _engineProcessor;
-	    private readonly IBTZJoyStickController _joyStickController;
+	    private readonly IBtzJoyStickController _joyStickController;
 	    private readonly ISerialDeviceHelper _serialDeviceHelper;
 	    private readonly IArgumentTranslator _argumentTranslator;
 	    private readonly IPluginLoader _pluginLoader;
@@ -45,7 +45,7 @@ namespace BollerTuneZCore
             IEngineProcessor engineProcessor,
             ISerialDeviceHelper serialDeviceHelper,
             IArgumentTranslator argumentTranslator,
-            IBTZJoyStickController joyStickController,
+            IBtzJoyStickController joyStickController,
             ISettingsRepository settingsRepository,
             IPluginLoader pluginLoader,
             IPluginRepository pluginRepository)
@@ -180,7 +180,7 @@ namespace BollerTuneZCore
             #endregion
             _joyStickController.Initialize();
             SLog.Info("Service will now start");
-            _joyStickController.Run();
+            _joyStickController.Start();
             _steeringProcessor.Start();
             _engineProcessor.Start();
 		}

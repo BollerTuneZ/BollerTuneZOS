@@ -17,7 +17,7 @@ namespace ControllerTest
             JoyStickHandler handler = new JoyStickHandler();
             handler.OnButtonTriggered += HandlerOnOnButtonTriggered;
             handler.Initialize();
-            handler.Run();
+            handler.Start();
             Console.ReadKey();
         }
 

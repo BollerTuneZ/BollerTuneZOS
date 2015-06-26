@@ -24,15 +24,15 @@ namespace Services.BollerTuneZ
         private readonly ISerialDeviceHelper _serialDeviceHelper;
         private readonly IEngineProcessor _engineProcessor;
         private readonly ISteeringProcessor _steeringProcessor;
-        private readonly IBTZJoyStickController _joyStickController;
+        private readonly IBtzJoyStickController _joyStickController;
         private readonly IArgumentTranslator _argumentTranslator;
         private IBTZSocket _engineSocket;
         private IBTZSocket _steeringSocket;
-        private volatile bool SocketsConnected;
+        private volatile bool _socketsConnected;
         private SteeringSettings _steeringSettings;
         BtzArgument _networkType;
 
-        public BollerTuneZService(ISerialDeviceHelper serialDeviceHelper, IEngineProcessor engineProcessor, ISteeringProcessor steeringProcessor, IBTZJoyStickController joyStickController, IArgumentTranslator argumentTranslator)
+        public BollerTuneZService(ISerialDeviceHelper serialDeviceHelper, IEngineProcessor engineProcessor, ISteeringProcessor steeringProcessor, IBtzJoyStickController joyStickController, IArgumentTranslator argumentTranslator)
         {
             _serialDeviceHelper = serialDeviceHelper;
             _engineProcessor = engineProcessor;
@@ -50,6 +50,7 @@ namespace Services.BollerTuneZ
         public void Stop()
         {
             SLog.Debug("Stop -> BollerTuneZ Service");
+            _joyStickController.Stop();
             _engineProcessor.Stop();
             _steeringProcessor.Stop();
         }
@@ -60,7 +61,7 @@ namespace Services.BollerTuneZ
             _serialDeviceHelper.OnDeviceFound += OnSerialDeviceFound;
             _networkType = BtzArgument.Serial;
             SLog.Info("Waiting for Serial sockets to connect");
-            while (!SocketsConnected)
+            while (!_socketsConnected)
             {
                 Thread.Sleep(100);
             }
@@ -81,7 +82,7 @@ namespace Services.BollerTuneZ
             SLog.Info("Service will now start");
             _steeringProcessor.Start();
             _engineProcessor.Start();
-            _joyStickController.Run();
+            _joyStickController.Start();
         }
 
         bool ConnectToJoystick()
@@ -121,7 +122,7 @@ namespace Services.BollerTuneZ
             }
             if (_steeringSocket != null && _engineSocket != null)
             {
-                SocketsConnected = true;
+                _socketsConnected = true;
             }
         }
         #endregion

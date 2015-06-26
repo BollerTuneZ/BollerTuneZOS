@@ -6,9 +6,9 @@ namespace Testing
 {
 	public class JoyStickTesting
 	{
-		readonly IBTZJoyStickController _btzJoyStickController;
+		readonly IBtzJoyStickController _btzJoyStickController;
 
-		public JoyStickTesting (IBTZJoyStickController _btzJoyStickController)
+		public JoyStickTesting (IBtzJoyStickController _btzJoyStickController)
 		{
 			this._btzJoyStickController = _btzJoyStickController;
 			this._btzJoyStickController.OnPowerChanged += OnPowerHasChanged;
@@ -18,7 +18,7 @@ namespace Testing
 		public void Run()
 		{
 			_btzJoyStickController.Initialize ();
-			_btzJoyStickController.Run ();
+			_btzJoyStickController.Start();
 		}
 
 		void OnSteeringHasChanged (object sender, EventArgs e)
