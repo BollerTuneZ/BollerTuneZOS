@@ -2,26 +2,39 @@ $(document).ready(function(){
 	
 	var socket = io.connect();
 	
+	socket.on('StartService', function() {
+	/* 	console.log("StartService"); */
+	});
+	socket.on('StopService', function() {
+		/* console.log("StopService"); */
+	});
+	socket.on('SaveSettings', function() {
+		/* console.log("SaveSettings"); */
+	});
+	socket.on('RestoreSettings', function() {
+		/* console.log("RestoreSettings"); */
+	});
+
 	
 	function StartService(){
 		var hallo;
 		socket.emit('StartService');
-		console.log("StartService");
+		
 	}
 	
 	function StopService(){
 		socket.emit('StopService');
-		console.log("StopService");
+		
 	}
 	
 	function SaveSettings(){
 		socket.emit('SaveSettings');
-		console.log("SaveSettings");
+		
 	}
 	
 	function RestoreSettings(){
 		socket.emit('RestoreSettings');
-		console.log("RestoreSettings");
+		
 	}
 	
 	// bei einem Klick

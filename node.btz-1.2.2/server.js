@@ -5,9 +5,7 @@ var express = require('express')
 ,   conf = require('./config.json')
 , 	nodeCouchDB = require("node-couchdb");
 
-// Datenbank 
-
-var couch = new nodeCouchDB("localhost", 5984);
+// Daten
 
 
 // Webserver
@@ -63,32 +61,38 @@ io.sockets.on('connection', function (socket) {
 			
 			io.sockets.emit('SteeringConfig', { SteeringRangeMax: data.SteeringRangeMax , SteeringRangeMin: data.SteeringRangeMin, SteeringCenter: data.SteeringCenter, SteeringToleranz: data.SteeringToleranz });
 			
-			console.log("Lenkung");
+		/*
+	console.log("Lenkung");
 			console.log("Lenkung Max : " + data.SteeringRangeMax);
 			console.log("Lenkung Min : " + data.SteeringRangeMin);
 			console.log("Lenkung Center : " + data.SteeringCenter);
 			console.log("");
+*/
 		});
 		
 		
 		socket.on('SteeringMotorConfig', function (data) {
 			// so wird dieser Text an alle anderen Benutzer gesendet
 			io.sockets.emit('SteeringMotorConfig', { SteeringSpeedMax: data.SteeringSpeedMax, SteeringSpeedMin: data.SteeringSpeedMin });
-			console.log("Lenkung Speed");
+		/*
+	console.log("Lenkung Speed");
 			console.log("Lenkmotor Speed Max : " + data.SteeringSpeedMax);
 			console.log("Lenkmotor Speed Min : " + data.SteeringSpeedMin);
 			console.log("");
+*/
 
 		});
 		
 		socket.on('EngineConfig', function (data) {
 			// so wird dieser Text an alle anderen Benutzer gesendet
 			io.sockets.emit('EngineConfig', { EngineSpeedStartMin: data.EngineSpeedStartMin, EngineSpeedMax: data.EngineSpeedMax, EngineRampTime: data.EngineRampTime });
-			console.log("Motor Speed");
+			/*
+console.log("Motor Speed");
 			console.log("Motor Start Speed Max : " + data.EngineSpeedStartMin);
 			console.log("Motor Speed Max : " + data.EngineSpeedMax);
 			console.log("Motor Start Rampe : " + data.EngineRampTime);
 			console.log("");
+*/
 
 		});
 		
@@ -96,28 +100,28 @@ io.sockets.on('connection', function (socket) {
 		socket.on('StartService', function() {
 			
 			io.sockets.emit('StartService');
-			console.log("StartService");
+/* 			console.log("StartService"); */
 			
 		});
 		
 		socket.on('StopService', function() {
 		
 			io.sockets.emit('StopService');
-			console.log("StopService");
+			/* console.log("StopService"); */
 			
 		});
 		
 		socket.on('SaveSettings', function() {
 			
 			io.sockets.emit('SaveSettings');
-			console.log("SaveSettings");
+			/* console.log("SaveSettings"); */
 			
 		});
 		
 		socket.on('RestoreSettings', function() {
 			
 			io.sockets.emit('RestoreSettings');
-			console.log("RestoreSettings");
+/* 			console.log("RestoreSettings"); */
 			
 		});
 	
