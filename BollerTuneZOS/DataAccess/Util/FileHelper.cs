@@ -162,7 +162,7 @@ namespace DataAccess.Util
 
         void CreateDirectory(string directory)
         {
-            var path = Path.Combine(Environment.CurrentDirectory, directory);
+            var path = directory;
             var directoryInfo = new DirectoryInfo(path);
             if (!directoryInfo.Exists)
             {
