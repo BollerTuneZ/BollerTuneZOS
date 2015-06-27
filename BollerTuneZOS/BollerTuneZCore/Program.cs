@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Threading;
 using Testing;
 using Communication.Infrastructure;
@@ -28,6 +29,13 @@ namespace BollerTuneZCore
 		}
 		public static void Setup()
 		{
+		    var logDir = String.Format("{0}\\Logs", Environment.CurrentDirectory);
+		    var dirInfo = new DirectoryInfo(logDir);
+		    if (!dirInfo.Exists)
+		    {
+		        dirInfo.Create();
+		    }
+
 			Hierarchy hierarchy = (Hierarchy)LogManager.GetRepository();
 
 			PatternLayout patternLayout = new PatternLayout();
