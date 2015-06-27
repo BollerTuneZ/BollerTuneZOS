@@ -46,7 +46,7 @@ namespace BollerTuneZCore
 
 			RollingFileAppender roller = new RollingFileAppender();
 			roller.AppendToFile = false;
-			roller.File = @"Logs/EventLog.txt";
+			roller.File = "BtzCoreLog.txt";
 			roller.Layout = patternLayout;
 			roller.MaxSizeRollBackups = 5;
 			roller.MaximumFileSize = "1GB";
