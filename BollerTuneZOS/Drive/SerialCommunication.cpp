@@ -8,10 +8,10 @@ Pattern {Command,SubCommand,[Value])
 #include "Arduino.h"
 void SerialCommunicationClass::init()
 {
-	pinMode(13, OUTPUT);
 	Serial.begin(BOUD_RATE);
+	_log.init("SerialCommunicationClass");
 	byte *dataArray = new byte[2];
-
+	_log.Log(LOG_LEVEL_INFO, "Searching for host");
 	while (true) //Suche nach Host
 	{
 		if (Serial.available() == 2)
@@ -21,15 +21,14 @@ void SerialCommunicationClass::init()
 
 			if (dataArray[0] != START_BYTE)
 			{
-				digitalWrite(6, LOW);
-				digitalWrite(13, LOW);
+				_log.Log(LOG_LEVEL_WARN, "Startbyte " + String((int)dataArray[0]) + " is not equal to: " + String((int)START_BYTE));
 				continue;
 			}
 			Serial.println(IDENTITY);
-			
+			_log.Log(LOG_LEVEL_INFO, "Host found");
 			break;
+
 		}
-		digitalWrite(13, LOW);
 	}
 }
 

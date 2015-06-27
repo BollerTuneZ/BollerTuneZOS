@@ -8,7 +8,7 @@
 #else
 #include "WProgram.h"
 #endif
-#include "Constants.h"
+
 
 //Levels
 #define LOG_LEVEL_DEBUG "Debug"
@@ -28,7 +28,7 @@ class LogClass
 protected:
 	//Pattern Log LOG_%IDENTITY% Class[id]{LEVEL} Message
 	String _className;
-	static int id;
+	int id;
 public:
 	void init(String classname);
 

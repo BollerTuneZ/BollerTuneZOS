@@ -15,13 +15,16 @@
 SerialCommunicationClass _comSerial;
 MotorHandlerClass _motorHandler;
 SteeringHandlerClass _steeringHandler;
+LogClass _log;
 // the setup function runs once when you press reset or power the board
 void setup() {
 	//Auswahl der Kommunikation
+	_log.init("Main");
 	if (COM_CURRENT == SERIAL) //Serielle Schnittstelle wird benuntz
 	{
 		_comSerial.init();
 	}
+	_log.Log(LOG_LEVEL_INFO, "Initialize Motorhandler");
 	_motorHandler.init(); 
 }
 
@@ -56,12 +59,12 @@ void ExecuteCommand(CommandClass command)
 {
 	if (command.Command == COMMAND_DIRECTION)
 	{
-		Serial.println(command.SubCommand);
+		_log.Log(LOG_LEVEL_DEBUG, "Set Direction to:" + String(command.SubCommand));
 		_motorHandler.SetDirection(command.SubCommand);
 	}
 	else if (command.Command == COMMAND_POWER)
 	{
-		Serial.println(command.SubCommand);
+		_log.Log(LOG_LEVEL_DEBUG, "Set Speed to:" + String((int)command.SubCommand));
 		_motorHandler.SetSpeed(command.SubCommand);
 	}
 	else if (command.Command == COMMAND_SET_ENCODER)

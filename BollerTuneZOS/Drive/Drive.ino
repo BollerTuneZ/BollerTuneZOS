@@ -14,11 +14,15 @@
 
 SerialCommunicationClass _comSerial;
 EngineHandlerClass _engineHandler;
+LogClass _log;
+
 void setup() {
 	if (COM_CURRENT == SERIAL) //Serielle Schnittstelle wird benuntz
 	{
 		_comSerial.init();
 	}
+	_log.init("Main");
+	_log.Log(LOG_LEVEL_INFO, "Initialize EgineHandler");
 	_engineHandler.init();
 }
 
@@ -40,12 +44,12 @@ void ExecuteCommand(CommandClass command)
 {
 	if (command.Command == COMMAND_DIRECTION)
 	{
-		Serial.println(command.SubCommand);
+		_log.Log(LOG_LEVEL_DEBUG, "Direction set to:" + String(command.SubCommand));
 		_engineHandler.SetDirection(command.SubCommand);
 	}
 	else if (command.Command == COMMAND_DRIVE_POWER)
 	{
-		Serial.println(command.SubCommand);
+		_log.Log(LOG_LEVEL_DEBUG, "Drivepower set to:" + String(command.SubCommand));
 		_engineHandler.SetSpeed(command.SubCommand);
 	}
 	else if (command.Command == COMMAND_DRIVE_READ)

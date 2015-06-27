@@ -10,11 +10,13 @@
 #endif
 #include "Constants.h"
 #include "Command.h"
+#include "Log.h"
+
 class SerialCommunicationClass
 {
 protected:
 
-
+	LogClass _log;
 public:
 	void init();
 
