@@ -12,7 +12,9 @@ using Infrastructure.Data.Settings;
 using Infrastructure.JoystickApi;
 using Infrastructure.Main;
 using Infrastructure.Plugin;
+using Infrastructure.Services;
 using Plugin.Infrastructure.API.DataAccess;
+using Services.BollerTuneZ;
 using TinyIoC;
 using Communication.Infrastructure;
 using Communication;
@@ -48,6 +50,7 @@ namespace BollerTuneZCore
             TinyIoCContainer.Current.Register<IPluginLoader, PluginLoader>().AsSingleton();
             TinyIoCContainer.Current.Register<IPluginSettingsRepository, PluginSettingsRepository>().AsMultiInstance();
             TinyIoCContainer.Current.Register<IPluginManager, PluginManager>().AsSingleton();
+		    TinyIoCContainer.Current.Register<IControllService, BollerTuneZService>("btz_service");
 			TinyIoCContainer.Current.Register<BollerTuneZCore.Main> ();
 		}
 	}
