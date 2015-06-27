@@ -64,13 +64,13 @@ namespace DataAccess.Util
         public void WriteSteeringSettingsFile(string content)
         {
             var currentDirectory = Environment.CurrentDirectory;
-            var filePath = String.Format("{0}{1}", GetCurrentDirectory(), SteeringSettingsFilePath);
+            var filePath = String.Format("{0}/{1}", GetCurrentDirectory(), SteeringSettingsFilePath);
             WriteFile(filePath,content);
         }
 
         public string ReadSteeringSettingsFile()
         {
-            var filePath = String.Format("{0}{1}", GetCurrentDirectory(), SteeringSettingsFilePath);
+            var filePath = String.Format("{0}/{1}", GetCurrentDirectory(), SteeringSettingsFilePath);
             return ReadFile(filePath);
         }
         #endregion
@@ -78,13 +78,13 @@ namespace DataAccess.Util
         #region Engine Settings
         public void WriteEngineSettingsFile(string content)
         {
-            var filePath = String.Format("{0}{1}", GetCurrentDirectory(), EngineSettingsFilePath);
+            var filePath = String.Format("{0}/{1}", GetCurrentDirectory(), EngineSettingsFilePath);
             WriteFile(filePath, content);
         }
 
         public string ReadEngineSettingsFile()
         {
-            var filePath = String.Format("{0}{1}", GetCurrentDirectory(), EngineSettingsFilePath);
+            var filePath = String.Format("{0}/{1}", GetCurrentDirectory(), EngineSettingsFilePath);
             return ReadFile(filePath);
         }
         #endregion
