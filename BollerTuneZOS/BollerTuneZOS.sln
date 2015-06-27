@@ -57,6 +57,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BTZ.Plugin.Test", "BTZ.Plug
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services", "Services\Services.csproj", "{9EA84C32-2410-4433-B0F6-4CE04882A359}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Debugging", "BtzDebugging\Debugging.csproj", "{27A64FF2-22BA-471D-9BD3-DE45F88C0049}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -355,6 +357,18 @@ Global
 		{9EA84C32-2410-4433-B0F6-4CE04882A359}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{9EA84C32-2410-4433-B0F6-4CE04882A359}.Release|Win32.ActiveCfg = Release|Any CPU
 		{9EA84C32-2410-4433-B0F6-4CE04882A359}.Release|x86.ActiveCfg = Release|Any CPU
+		{27A64FF2-22BA-471D-9BD3-DE45F88C0049}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{27A64FF2-22BA-471D-9BD3-DE45F88C0049}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{27A64FF2-22BA-471D-9BD3-DE45F88C0049}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{27A64FF2-22BA-471D-9BD3-DE45F88C0049}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{27A64FF2-22BA-471D-9BD3-DE45F88C0049}.Debug|Win32.ActiveCfg = Debug|Any CPU
+		{27A64FF2-22BA-471D-9BD3-DE45F88C0049}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{27A64FF2-22BA-471D-9BD3-DE45F88C0049}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{27A64FF2-22BA-471D-9BD3-DE45F88C0049}.Release|Any CPU.Build.0 = Release|Any CPU
+		{27A64FF2-22BA-471D-9BD3-DE45F88C0049}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{27A64FF2-22BA-471D-9BD3-DE45F88C0049}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{27A64FF2-22BA-471D-9BD3-DE45F88C0049}.Release|Win32.ActiveCfg = Release|Any CPU
+		{27A64FF2-22BA-471D-9BD3-DE45F88C0049}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -382,5 +396,6 @@ Global
 		{F9C0771D-6B87-4607-8FD4-32D4670E9E93} = {1C49E215-98CA-4308-940B-061A9E7899EF}
 		{C891AE92-597B-4FFE-BB21-97438CE0D286} = {9D548224-C562-463F-B613-72CE78B85289}
 		{9EA84C32-2410-4433-B0F6-4CE04882A359} = {1C49E215-98CA-4308-940B-061A9E7899EF}
+		{27A64FF2-22BA-471D-9BD3-DE45F88C0049} = {1C49E215-98CA-4308-940B-061A9E7899EF}
 	EndGlobalSection
 EndGlobal

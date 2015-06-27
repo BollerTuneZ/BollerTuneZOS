@@ -36,9 +36,9 @@ namespace Communication.MessageProcessor
 	        _settingsRepository = settingsRepository;
 	        _settings = _settingsRepository.RetriveEngineSettings();
             #if DEBUG
+            _readLogAction = new System.Timers.Timer();
             _readLogAction.Elapsed += OnreadLogElapsed;
             _readLogAction.Interval = 100;
-            
             #endif
 	    }
 
