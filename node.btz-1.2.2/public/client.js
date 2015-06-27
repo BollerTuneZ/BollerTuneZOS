@@ -2,8 +2,10 @@
 var socket = io.connect();
 $(document).ready(function(){
 
- 		
-	/* RestoreSettingsDOM(); */
+ 	/*
+	
+	RestoreSettingsDOM(); 
+*/
 	
 	
 		socket.on('StartService', function() {
@@ -43,7 +45,8 @@ $(document).ready(function(){
 				
 		}
 		
-		/*
+		
+/*
 // nur zum testen ! 
 		function RestoreSettingsDOM(){
 		
@@ -59,12 +62,13 @@ $(document).ready(function(){
 			
 		}
 */
+
 		
 		// bei einem Klick
 		
 		$('#StartService').click(StartService);
 		$('#StopService').click(StopService);
 		$('#SaveSettings').click(SaveSettings);
-		$('#RestoreSettings').click(RestoreSettingsDOM);
+		$('#RestoreSettings').click(RestoreSettings());
 
 	});
