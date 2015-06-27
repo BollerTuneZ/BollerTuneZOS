@@ -34,9 +34,7 @@ namespace BollerTuneZCore
 		    {
 		        dirInfo.Create();
 		    }
-		        dirInfo.Create();
-		    }
-            */
+            
 
 			Hierarchy hierarchy = (Hierarchy)LogManager.GetRepository();
 
