@@ -72,7 +72,6 @@ $(document).ready(function(){
 	$("#LenkungMax").mousedown(function(event){
 	    	interval = setInterval(function(){
 	        	$("#LenkungMaxLabel").html($("#LenkungMax").val());
-				var range_in = $("#LenkungMax").val();
 				SteeringConfig()
 	    	},11);
 		});
@@ -84,7 +83,6 @@ $(document).ready(function(){
 	document.getElementById('LenkungMax').ontouchstart = function (eve) {
 			interval = setInterval(function(){
 				$("#LenkungMaxLabel").html($("#LenkungMax").val());
-				var range_in = $("#LenkungMax").val();
 				SteeringConfig()
 		},11);
 	};
@@ -98,7 +96,6 @@ $(document).ready(function(){
 	$("#LenkungMin").mousedown(function(event){
 	    	interval = setInterval(function(){
 	        	$("#LenkungMinLabel").html($("#LenkungMin").val());
-				var range_in = $("#LenkungMin").val();
 				SteeringConfig()
 	    	},11);
 		});
@@ -110,7 +107,6 @@ $(document).ready(function(){
 	document.getElementById('LenkungMin').ontouchstart = function (eve) {
 			interval = setInterval(function(){
 				$("#LenkungMinLabel").html($("#LenkungMin").val());
-				var range_in = $("#LenkungMin").val();
 				SteeringConfig()
 		},11);
 	};
@@ -122,9 +118,7 @@ $(document).ready(function(){
 	$("#LenkungCenter").mousedown(function(event){
 	    	interval = setInterval(function(){
 	        	$("#LenkungCenterLabel").html($("#LenkungCenter").val());
-				var range_in = $("#LenkungCenter").val();
 				SteeringConfig()
-				 
 	    	},11);
 		});
 	$("#LenkungCenter").mouseup(function(event){
@@ -135,9 +129,7 @@ $(document).ready(function(){
 	document.getElementById('LenkungCenter').ontouchstart = function (eve) {
 			interval = setInterval(function(){
 				$("#LenkungCenterLabel").html($("#LenkungCenter").val());
-				var range_in = $("#LenkungCenter").val();
 				SteeringConfig()
-			
 		},11);
 	};
 	document.getElementById('LenkungCenter').ontouchend = function (eve) {
