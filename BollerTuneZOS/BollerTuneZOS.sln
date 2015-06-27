@@ -57,8 +57,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BTZ.Plugin.Test", "BTZ.Plug
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Debugging", "BtzDebugging\Debugging.csproj", "{27A64FF2-22BA-471D-9BD3-DE45F88C0049}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DebugginTest", "BtzDebugginTest\DebugginTest.csproj", "{D29B53CE-E538-4A5F-A45D-48F31B59EEAA}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services", "Services\Services.csproj", "{9EA84C32-2410-4433-B0F6-4CE04882A359}"
 EndProject
 Global
