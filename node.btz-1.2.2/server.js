@@ -2,8 +2,7 @@ var express = require('express')
 ,   app = express()
 ,   server = require('http').createServer(app)
 ,   io = require('socket.io').listen(server)
-,   conf = require('./config.json')
-, 	nodeCouchDB = require("node-couchdb");
+,   conf = require('./config.json');
 
 // Daten
 

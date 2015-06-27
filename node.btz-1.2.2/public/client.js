@@ -43,7 +43,8 @@ $(document).ready(function(){
 				
 		}
 		
-		// nur zum testen ! 
+		/*
+// nur zum testen ! 
 		function RestoreSettingsDOM(){
 		
 			
@@ -57,6 +58,7 @@ $(document).ready(function(){
 
 			
 		}
+*/
 		
 		// bei einem Klick
 		
