@@ -41,10 +41,7 @@ $(document).ready(function(){
 		
 		function RestoreSettings(){
 			socket.emit('RestoreSettings');
-			
-				
 		}
-		
 		
 /*
 // nur zum testen ! 
@@ -69,6 +66,6 @@ $(document).ready(function(){
 		$('#StartService').click(StartService);
 		$('#StopService').click(StopService);
 		$('#SaveSettings').click(SaveSettings);
-		$('#RestoreSettings').click(RestoreSettings());
+		$('#RestoreSettings').click(RestoreSettings;
 
 	});
