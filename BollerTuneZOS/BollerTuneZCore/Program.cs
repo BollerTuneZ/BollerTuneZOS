@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Threading;
 using Testing;
 using Communication.Infrastructure;
@@ -28,6 +29,11 @@ namespace BollerTuneZCore
 		}
 		public static void Setup()
 		{
+		    var dirInfo = new  DirectoryInfo(Path.Combine(Environment.CurrentDirectory, "Logs"));
+		    if (!dirInfo.Exists)
+		    {
+		        dirInfo.Create();
+		    }
 			Hierarchy hierarchy = (Hierarchy)LogManager.GetRepository();
 
 			PatternLayout patternLayout = new PatternLayout();
@@ -36,7 +42,7 @@ namespace BollerTuneZCore
 
 			RollingFileAppender roller = new RollingFileAppender();
 			roller.AppendToFile = false;
-			roller.File = @"Logs\EventLog.txt";
+			roller.File = @"Logs/BtzCoreLog.txt";
 			roller.Layout = patternLayout;
 			roller.MaxSizeRollBackups = 5;
 			roller.MaximumFileSize = "1GB";
