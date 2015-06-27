@@ -34,7 +34,16 @@ namespace BollerTuneZCore
 		    {
 		        dirInfo.Create();
 		    }
-            
+            dirInfo = new DirectoryInfo(Path.Combine(Environment.CurrentDirectory, "Settings"));
+            if (!dirInfo.Exists)
+            {
+                dirInfo.Create();
+            }
+            dirInfo = new DirectoryInfo(Path.Combine(Environment.CurrentDirectory, "Plugin"));
+            if (!dirInfo.Exists)
+            {
+                dirInfo.Create();
+            }
 
 			Hierarchy hierarchy = (Hierarchy)LogManager.GetRepository();
 
