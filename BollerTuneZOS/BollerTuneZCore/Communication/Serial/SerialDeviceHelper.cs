@@ -72,6 +72,7 @@ namespace Communication.Serial
                 port.Write(detectMessage,0,detectMessage.Length);
                 Thread.Sleep(1000);
                 int count = port.BytesToRead;
+                SLog.DebugFormat("BytesToRead {0}",count);
                 string returnMessage = "";
                 int intReturnASCII = 0;
                 while (count > 0)
