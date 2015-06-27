@@ -19,11 +19,43 @@ $(document).ready(function(){
 	});
 	
 	socket.on('SteeringMotorConfig', function (data) {
+	
 		$('#LenkmotorSpeedMax').val(data.SteeringSpeedMax);
 		$('#LenkmotorSpeedMin').val(data.SteeringSpeedMin);
+		
 		$('#LenkmotorSpeedMaxLabel').text(data.SteeringSpeedMax);
 		$('#LenkmotorSpeedMinLabel').text(data.SteeringSpeedMin);
+		
 	});
+	
+
+	socket.on('SteeringConfigDOM', function (data) {
+	
+		document.getElementById("LenkungMax").max = data.SteeringRangeMax_MaxDOM;
+		document.getElementById("LenkungMax").min = data.SteeringRangeMax_MinDOM;
+		
+		document.getElementById("LenkungMin").max = data.SteeringRangeMin_MaxDOM;
+		document.getElementById("LenkungMin").min = data.SteeringRangeMin_MinDOM;
+		
+		document.getElementById("LenkungCenter").max = data.SteeringCenter_MaxDOM;
+		document.getElementById("LenkungCenter").min = data.SteeringCenter_MinDOM;
+
+		document.getElementById("toleranz").max = data.SteeringToleranz_MaxDOM;
+		document.getElementById("toleranz").min = data.SteeringToleranz_MinDOM;
+		
+	});
+	
+	
+	socket.on('SteeringMotorConfigDOM', function (data) {
+
+		document.getElementById("LenkmotorSpeedMax").max = data.SteeringSpeedMax_MaxDOM;
+		document.getElementById("LenkmotorSpeedMax").min = data.SteeringSpeedMax_MinDOM;
+		
+		document.getElementById("LenkmotorSpeedMin").max = data.SteeringSpeedMin_MaxDOM;
+		document.getElementById("LenkmotorSpeedMin").min = data.SteeringSpeedMin_MinDOM;
+		
+	});
+
 /*
 	window.ondevicemotion = function(event) {  
     var accelerationX = event.accelerationIncludingGravity.x;  

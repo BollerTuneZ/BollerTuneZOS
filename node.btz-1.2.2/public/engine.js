@@ -14,9 +14,21 @@ $(document).ready(function(){
 		$('#EngineSpeedStartMinLabel').text(data.EngineSpeedStartMin);
 	
 	});
+	
+	socket.on('EngineConfigDOM', function (data) {
 
+		document.getElementById("EngineSpeedMax").max = data.EngineSpeedMax_MaxDOM;
+		document.getElementById("EngineSpeedMax").min = data.EngineSpeedMax_MinDOM;
+		console.log(data.EngineSpeedMax_MinDOM);
+		document.getElementById("EngineRampTime").max = data.EngineRampTime_MaxDOM;
+		document.getElementById("EngineRampTime").min = data.EngineRampTime_MinDOM;
+		
+		document.getElementById("EngineSpeedStartMin").max = data.EngineSpeedStartMin_MaxDOM;
+		document.getElementById("EngineSpeedStartMin").min = data.EngineSpeedStartMin_MinDOM;
+	
+	});
 
-	//Lenkung senden
+	// senden
 	function EngineConfig(){
 		// range auslesen 
 	
