@@ -55,9 +55,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plugin.Data", "Plugin.Data\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BTZ.Plugin.Test", "BTZ.Plugin.Tests\BTZ.Plugin.Test.csproj", "{C891AE92-597B-4FFE-BB21-97438CE0D286}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Debugging", "Debugging\Debugging.csproj", "{27A64FF2-22BA-471D-9BD3-DE45F88C0049}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Debugging", "BtzDebugging\Debugging.csproj", "{27A64FF2-22BA-471D-9BD3-DE45F88C0049}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DebugginTest", "DebugginTest\DebugginTest.csproj", "{D29B53CE-E538-4A5F-A45D-48F31B59EEAA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DebugginTest", "BtzDebugginTest\DebugginTest.csproj", "{D29B53CE-E538-4A5F-A45D-48F31B59EEAA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
