@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Btz.Debugging;
 using Communication.Infrastructure.MessageProcessor;
 using Data.Settings;
 using Data.Steering;
@@ -191,7 +192,12 @@ namespace BollerTuneZCore.Processors
             string received = String.Empty;
             try
             {
-                received = Encoding.Default.GetString(_socket.ReceiveData());
+                var logResult = LogBtzArduino.Log(_socket.ReceiveData());
+                if (logResult.Item1)
+                {
+                    return;
+                }
+                received = logResult.Item2;
                 SLog.DebugFormat("Received Data ({0})",received);
             }
             catch (Exception e)

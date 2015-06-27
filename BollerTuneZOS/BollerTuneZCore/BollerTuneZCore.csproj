@@ -58,6 +58,10 @@
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
+    <ProjectReference Include="..\BtzDebugging\Debugging.csproj">
+      <Project>{27A64FF2-22BA-471D-9BD3-DE45F88C0049}</Project>
+      <Name>Debugging</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DataAccess\DataAccess.csproj">
       <Project>{9d69f92c-758f-4cb9-beaa-6cd929f1f4eb}</Project>
       <Name>DataAccess</Name>
