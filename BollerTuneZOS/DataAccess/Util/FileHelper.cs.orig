@@ -70,7 +70,8 @@ namespace DataAccess.Util
 
         public string ReadSteeringSettingsFile()
         {
-            var filePath = String.Format("{0}{1}", GetCurrentDirectory(), SteeringSettingsFilePath);
+            var currentDirectory = Environment.CurrentDirectory;
+            var filePath = String.Format("{0}{1}", currentDirectory, SteeringSettingsFilePath);
             return ReadFile(filePath);
         }
         #endregion
@@ -78,13 +79,15 @@ namespace DataAccess.Util
         #region Engine Settings
         public void WriteEngineSettingsFile(string content)
         {
-            var filePath = String.Format("{0}{1}", GetCurrentDirectory(), EngineSettingsFilePath);
+            var currentDirectory = Environment.CurrentDirectory;
+            var filePath = String.Format("{0}{1}", currentDirectory, EngineSettingsFilePath);
             WriteFile(filePath, content);
         }
 
         public string ReadEngineSettingsFile()
         {
-            var filePath = String.Format("{0}{1}", GetCurrentDirectory(), EngineSettingsFilePath);
+            var currentDirectory = Environment.CurrentDirectory;
+            var filePath = String.Format("{0}{1}", currentDirectory, EngineSettingsFilePath);
             return ReadFile(filePath);
         }
         #endregion
@@ -160,7 +163,11 @@ namespace DataAccess.Util
 
         void CreateDirectory(string directory)
         {
-            var path = String.Format("{0}{1}",GetCurrentDirectory(), directory);
+<<<<<<< HEAD
+            var path = String.Format("{0}/{1}", Environment.CurrentDirectory, directory);
+=======
+            var path = String.Format("{0}{1}", Path.GetDirectoryName(Assembly.GetEntryAssembly().Location), directory);
+>>>>>>> 2b132cc... Crossover test
             var directoryInfo = new DirectoryInfo(path);
             if (!directoryInfo.Exists)
             {
@@ -188,10 +195,5 @@ namespace DataAccess.Util
             }
         }
         #endregion
-
-        static string GetCurrentDirectory()
-        {
-            return Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
-        }
     }
 }
