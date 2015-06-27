@@ -88,6 +88,8 @@ extern "C" void __cxa_pure_virtual() {;}
 #include <Command.cpp>
 #include <Command.h>
 #include <Config.h>
+#include <Log.cpp>
+#include <Log.h>
 #include <MotorHandler.cpp>
 #include <MotorHandler.h>
 #include <SerialCommunication.cpp>
