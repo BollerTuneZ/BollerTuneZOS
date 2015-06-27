@@ -15,19 +15,14 @@
 SerialCommunicationClass _comSerial;
 MotorHandlerClass _motorHandler;
 SteeringHandlerClass _steeringHandler;
-unsigned long lastTimeBlink;
-int blinkState = HIGH;
 // the setup function runs once when you press reset or power the board
 void setup() {
 	//Auswahl der Kommunikation
-	pinMode(5, OUTPUT);
-	pinMode(6, OUTPUT);
 	if (COM_CURRENT == SERIAL) //Serielle Schnittstelle wird benuntz
 	{
 		_comSerial.init();
 	}
 	_motorHandler.init(); 
-	lastTimeBlink = millis();
 }
 
 // the loop function runs over and over again until power down or reset
@@ -49,7 +44,6 @@ void loop() {
 void SendPositionMessage()
 {
 	//Message pattern {EN}:<SteeringPosition>/<MotorPosition>
-	Blink(5);
 	String message = 
 		"{EN}:"
 		+ String(_steeringHandler.PositionSteering)
@@ -60,19 +54,15 @@ void SendPositionMessage()
 
 void ExecuteCommand(CommandClass command)
 {
-	Serial.println("Execute Command");
 	if (command.Command == COMMAND_DIRECTION)
 	{
-		Serial.print("Direction set to:");
 		Serial.println(command.SubCommand);
 		_motorHandler.SetDirection(command.SubCommand);
 	}
 	else if (command.Command == COMMAND_POWER)
 	{
-		Serial.print("Speed set to:");
 		Serial.println(command.SubCommand);
 		_motorHandler.SetSpeed(command.SubCommand);
-		Blink(6);
 	}
 	else if (command.Command == COMMAND_SET_ENCODER)
 	{
@@ -92,23 +82,4 @@ void ExecuteCommand(CommandClass command)
 		}
 		_steeringHandler.Refresh();
 	}
-}
-void Blink(int pin)
-{
-	unsigned long current = millis();
-
-	unsigned long diff = current - lastTimeBlink;
-	if (diff >= 500)
-	{
-		if (blinkState == HIGH)
-		{
-			blinkState = LOW;
-		}
-		else
-		{
-			blinkState = HIGH;
-		}
-		lastTimeBlink = current;
-	}
-	digitalWrite(pin, blinkState);
 }

@@ -38,16 +38,13 @@ void loop() {
 
 void ExecuteCommand(CommandClass command)
 {
-	Serial.println("Execute Command");
 	if (command.Command == COMMAND_DIRECTION)
 	{
-		Serial.print("Direction set to:");
 		Serial.println(command.SubCommand);
 		_engineHandler.SetDirection(command.SubCommand);
 	}
 	else if (command.Command == COMMAND_DRIVE_POWER)
 	{
-		Serial.print("Speed set to:");
 		Serial.println(command.SubCommand);
 		_engineHandler.SetSpeed(command.SubCommand);
 	}

@@ -10,7 +10,6 @@ void SerialCommunicationClass::init()
 {
 	pinMode(13, OUTPUT);
 	Serial.begin(BOUD_RATE);
-	Serial.println("Init Serial");
 	byte *dataArray = new byte[2];
 
 	while (true) //Suche nach Host

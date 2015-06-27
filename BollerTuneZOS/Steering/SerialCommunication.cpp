@@ -9,9 +9,6 @@
 
 void SerialCommunicationClass::init()
 {
-	pinMode(13, OUTPUT);
-	pinMode(6, OUTPUT);
-	pinMode(7, OUTPUT);
 	Serial.begin(BOUD_RATE);
 
 	byte *dataArray = new byte[2];
@@ -25,16 +22,12 @@ void SerialCommunicationClass::init()
 
 			if (dataArray[0] != START_BYTE)
 			{
-				digitalWrite(6, LOW);
-				digitalWrite(13, LOW);
 				continue;
 			}
 				Serial.println(IDENTITY);
-			
 			break;
 			
 		}
-		digitalWrite(13, LOW);
 	}
 }
 
