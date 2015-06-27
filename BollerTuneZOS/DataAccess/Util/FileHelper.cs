@@ -15,12 +15,12 @@ namespace DataAccess.Util
     internal class FileHelper
     {
         private static readonly ILog SLog = LogManager.GetLogger(typeof (FileHelper));
-        private const string SteeringSettingsFilePath = @"\Settings\settings_steering.btz";
-        private const string EngineSettingsFilePath = @"\Settings\settings_engine.btz";
+        private const string SteeringSettingsFilePath = "Settings/settings_steering.btz";
+        private const string EngineSettingsFilePath = "Settings/settings_engine.btz";
 
-        private const string PluginListFilePath = @"\Plugin\pluginList.btz";
-        private const string SettingsDirectory = @"\Settings";
-        private const string PluginDirectory = @"\Plugin";
+        private const string PluginListFilePath = "/Plugin/pluginList.btz";
+        private const string SettingsDirectory = "/Settings";
+        private const string PluginDirectory = "/Plugin";
         public FileHelper()
         {
             
@@ -162,7 +162,7 @@ namespace DataAccess.Util
 
         void CreateDirectory(string directory)
         {
-            var path = String.Format("{0}{1}", Environment.CurrentDirectory, directory);
+            var path = String.Format("{0}/{1}", Environment.CurrentDirectory, directory);
             var directoryInfo = new DirectoryInfo(path);
             if (!directoryInfo.Exists)
             {

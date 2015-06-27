@@ -62,7 +62,7 @@ namespace DataAccess.Repositories
                 SlLog.ErrorFormat("Plugin {0} could not be installed",info.Name);
                 return false;
             }
-            var executiveLibrary = String.Format("{0}\\{1}",destinationDirectory, (new FileInfo(info.ExecutiveLibrary)).Name);
+            var executiveLibrary = String.Format("{0}/{1}",destinationDirectory, (new FileInfo(info.ExecutiveLibrary)).Name);
             if (!File.Exists(executiveLibrary))
             {
                 SlLog.ErrorFormat("Plugin {0} ExecutiveLibrary could not be found",info.Name);
