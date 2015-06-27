@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using log4net;
@@ -162,7 +163,7 @@ namespace DataAccess.Util
 
         void CreateDirectory(string directory)
         {
-            var path = String.Format("{0}{1}", Environment.CurrentDirectory, directory);
+            var path = String.Format("{0}{1}", Path.GetDirectoryName(Assembly.GetEntryAssembly().Location), directory);
             var directoryInfo = new DirectoryInfo(path);
             if (!directoryInfo.Exists)
             {
