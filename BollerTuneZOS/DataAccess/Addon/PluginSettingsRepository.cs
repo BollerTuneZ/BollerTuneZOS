@@ -17,26 +17,26 @@ namespace DataAccess.Addon
     /// </summary>
     public class PluginSettingsRepository : IPluginSettingsRepository
     {
-        private readonly ISettingsRepository _setiingsRepository;
+        private readonly ISettingsRepository _settingsRepository;
         private static readonly ILog SLog = LogManager.GetLogger(typeof (PluginSettingsRepository));
 
-        public PluginSettingsRepository(ISettingsRepository setiingsRepository)
+        public PluginSettingsRepository(ISettingsRepository settingsRepository)
         {
-            _setiingsRepository = setiingsRepository;
+            _settingsRepository = settingsRepository;
             Mapper.CreateMap<SteeringSettings, PluginSteeringSettings>();
             Mapper.CreateMap<PluginSteeringSettings, SteeringSettings>();
         }
         public PluginSteeringSettings LoadSteeringSettings()
         {
             SLog.Debug("Plugin is loading SteeringSettings");
-            var settings = Mapper.Map<SteeringSettings, PluginSteeringSettings>(_setiingsRepository.RetriveSteeringSettings());
+            var settings = Mapper.Map<SteeringSettings, PluginSteeringSettings>(_settingsRepository.RetriveSteeringSettings());
             return settings;
         }
         public bool SaveSteeringSettings(PluginSteeringSettings settings)
         {
             var mappedSettings = Mapper.Map<PluginSteeringSettings, SteeringSettings>(settings);
             SLog.Debug("Plugin is saving settings");
-            _setiingsRepository.SaveSteeringSettings(mappedSettings);
+            _settingsRepository.SaveSteeringSettings(mappedSettings);
             return true; //TODO Hier mit rechten und so weiter arbeiten
         }
     }

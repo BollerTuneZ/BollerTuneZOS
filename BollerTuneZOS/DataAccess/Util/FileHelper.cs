@@ -33,20 +33,20 @@ namespace DataAccess.Util
 
         public void WritePluginList(string content)
         {
-            var filePath = String.Format("{0}{1}", Environment.CurrentDirectory, PluginListFilePath);
+            var filePath = String.Format("{0}{1}", GetCurrentDirectory(), PluginListFilePath);
             WriteFile(filePath,content);
         }
 
         public string ReadPluginList()
         {
-            var path = String.Format("{0}{1}",Environment.CurrentDirectory, PluginListFilePath);
+            var path = String.Format("{0}{1}",GetCurrentDirectory(), PluginListFilePath);
             return ReadFile(path);
         }
 
         public string CopyPluginDirectory(string source,string name)
         {
             var directoryInfo = new DirectoryInfo(source);
-            var destinationDirectory = String.Format("{0}{1}\\{2}", Environment.CurrentDirectory, PluginDirectory, name);
+            var destinationDirectory = String.Format("{0}{1}\\{2}", GetCurrentDirectory(), PluginDirectory, name);
             if ((new DirectoryInfo(destinationDirectory)).Exists)
             {
                 return null;
@@ -64,7 +64,7 @@ namespace DataAccess.Util
         public void WriteSteeringSettingsFile(string content)
         {
             var currentDirectory = Environment.CurrentDirectory;
-            var filePath = String.Format("{0}{1}", currentDirectory, SteeringSettingsFilePath);
+            var filePath = String.Format("{0}{1}", GetCurrentDirectory(), SteeringSettingsFilePath);
             WriteFile(filePath,content);
         }
 
