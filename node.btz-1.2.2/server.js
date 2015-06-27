@@ -45,12 +45,16 @@ app.get('/steuerung', function (req, res) {
 	res.sendfile(__dirname + '/public/steuerung.html');
 });
 
+app.get('/test', function (req, res) {
+	// so wird die Datei index.html ausgegeben
+	res.sendfile(__dirname + '/public/test.html');
+});
+
 var x = 0;
 
 // Websocket
 io.sockets.on('connection', function (socket) {
 
-		io.sockets.emit('RestoreSettings', { LenkMax: x });	
 		
 		
 					
@@ -96,6 +100,36 @@ console.log("Motor Speed");
 
 		});
 		
+		socket.on('RestoreSettings', function() {
+			io.sockets.emit('RestoreSettings');			
+		});
+		
+		socket.on('EngineConfigDOM', function (data) {
+			io.sockets.emit('EngineConfigDOM', { EngineSpeedMax_MaxDOM: data.EngineSpeedMax_MaxDOM , EngineSpeedMax_MinDOM: data.EngineSpeedMax_MinDOM , EngineRampTime_MaxDOM: data.EngineRampTime_MaxDOM , EngineRampTime_MinDOM: data.EngineRampTime_MinDOM , EngineSpeedStartMin_MaxDOM: data.EngineSpeedStartMin_MaxDOM , EngineSpeedStartMin_MinDOM: data.EngineSpeedStartMin_MinDOM });
+						
+			console.log(data.EngineSpeedMax_MaxDOM);
+			console.log(data.EngineSpeedMax_MinDOM);
+	
+			console.log(data.EngineRampTime_MaxDOM);
+			console.log(data.EngineRampTime_MinDOM);
+			
+			console.log(data.EngineSpeedStartMin_MaxDOM);
+			console.log(data.EngineSpeedStartMin_MinDOM);
+			
+			
+		});
+		
+		socket.on('SteeringConfigDOM', function (data) {
+			io.sockets.emit('SteeringConfigDOM', { SteeringRangeMax_MaxDOM: data.SteeringRangeMax_MaxDOM , SteeringRangeMax_MinDOM: data.SteeringRangeMax_MinDOM , SteeringRangeMin_MaxDOM: data.SteeringRangeMin_MaxDOM , SteeringRangeMin_MinDOM: data.SteeringRangeMin_MinDOM , SteeringCenter_MaxDOM: data.SteeringCenter_MaxDOM , SteeringCenter_MinDOM: data.SteeringCenter_MinDOM , SteeringToleranz_MaxDOM: data.SteeringToleranz_MaxDOM , SteeringToleranz_MinDOM: data.SteeringToleranz_MinDOM });
+			
+		});
+		
+		socket.on('SteeringMotorConfigDOM', function (data) {
+			io.sockets.emit('SteeringMotorConfigDOM', { SteeringSpeedMax_MaxDOM: data.SteeringSpeedMax_MaxDOM , SteeringSpeedMax_MinDOM: data.SteeringSpeedMax_MinDOM , SteeringSpeedMin_MaxDOM: data.SteeringSpeedMin_MaxDOM , SteeringSpeedMin_MinDOM: data.SteeringSpeedMin_MinDOM });
+			
+		});
+		
+
 
 		socket.on('StartService', function() {
 			
@@ -118,12 +152,7 @@ console.log("Motor Speed");
 			
 		});
 		
-		socket.on('RestoreSettings', function() {
-			
-			io.sockets.emit('RestoreSettings');
-/* 			console.log("RestoreSettings"); */
-			
-		});
+		
 	
 	
 });
