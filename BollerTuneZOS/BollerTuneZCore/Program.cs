@@ -29,12 +29,14 @@ namespace BollerTuneZCore
 		}
 		public static void Setup()
 		{
-		    var logDir = String.Format("{0}\\Logs", Environment.CurrentDirectory);
+            /*
+		    var logDir = String.Format("{0}/Logs", Environment.CurrentDirectory);
 		    var dirInfo = new DirectoryInfo(logDir);
 		    if (!dirInfo.Exists)
 		    {
 		        dirInfo.Create();
 		    }
+            */
 
 			Hierarchy hierarchy = (Hierarchy)LogManager.GetRepository();
 
@@ -44,7 +46,7 @@ namespace BollerTuneZCore
 
 			RollingFileAppender roller = new RollingFileAppender();
 			roller.AppendToFile = false;
-			roller.File = @"Logs\EventLog.txt";
+			roller.File = @"Logs/EventLog.txt";
 			roller.Layout = patternLayout;
 			roller.MaxSizeRollBackups = 5;
 			roller.MaximumFileSize = "1GB";
