@@ -60,6 +60,7 @@ namespace Services.BollerTuneZ
         {
             _serialDeviceHelper.OnDeviceFound += OnSerialDeviceFound;
             _networkType = BtzArgument.Serial;
+            _serialDeviceHelper.StartDiscover();
             SLog.Info("Waiting for Serial sockets to connect");
             while (!_socketsConnected)
             {

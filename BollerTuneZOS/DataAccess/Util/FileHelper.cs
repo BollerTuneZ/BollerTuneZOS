@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using log4net;
@@ -32,20 +33,20 @@ namespace DataAccess.Util
 
         public void WritePluginList(string content)
         {
-            var filePath = String.Format("{0}{1}", Environment.CurrentDirectory, PluginListFilePath);
+            var filePath = String.Format("{0}{1}", GetCurrentDirectory(), PluginListFilePath);
             WriteFile(filePath,content);
         }
 
         public string ReadPluginList()
         {
-            var path = String.Format("{0}{1}",Environment.CurrentDirectory, PluginListFilePath);
+            var path = String.Format("{0}{1}",GetCurrentDirectory(), PluginListFilePath);
             return ReadFile(path);
         }
 
         public string CopyPluginDirectory(string source,string name)
         {
             var directoryInfo = new DirectoryInfo(source);
-            var destinationDirectory = String.Format("{0}{1}\\{2}", Environment.CurrentDirectory, PluginDirectory, name);
+            var destinationDirectory = String.Format("{0}{1}\\{2}", GetCurrentDirectory(), PluginDirectory, name);
             if ((new DirectoryInfo(destinationDirectory)).Exists)
             {
                 return null;
@@ -63,14 +64,13 @@ namespace DataAccess.Util
         public void WriteSteeringSettingsFile(string content)
         {
             var currentDirectory = Environment.CurrentDirectory;
-            var filePath = String.Format("{0}{1}", currentDirectory, SteeringSettingsFilePath);
+            var filePath = String.Format("{0}/{1}", GetCurrentDirectory(), SteeringSettingsFilePath);
             WriteFile(filePath,content);
         }
 
         public string ReadSteeringSettingsFile()
         {
-            var currentDirectory = Environment.CurrentDirectory;
-            var filePath = String.Format("{0}{1}", currentDirectory, SteeringSettingsFilePath);
+            var filePath = String.Format("{0}/{1}", GetCurrentDirectory(), SteeringSettingsFilePath);
             return ReadFile(filePath);
         }
         #endregion
@@ -78,15 +78,13 @@ namespace DataAccess.Util
         #region Engine Settings
         public void WriteEngineSettingsFile(string content)
         {
-            var currentDirectory = Environment.CurrentDirectory;
-            var filePath = String.Format("{0}{1}", currentDirectory, EngineSettingsFilePath);
+            var filePath = String.Format("{0}/{1}", GetCurrentDirectory(), EngineSettingsFilePath);
             WriteFile(filePath, content);
         }
 
         public string ReadEngineSettingsFile()
         {
-            var currentDirectory = Environment.CurrentDirectory;
-            var filePath = String.Format("{0}{1}", currentDirectory, EngineSettingsFilePath);
+            var filePath = String.Format("{0}/{1}", GetCurrentDirectory(), EngineSettingsFilePath);
             return ReadFile(filePath);
         }
         #endregion
@@ -143,7 +141,7 @@ namespace DataAccess.Util
             }
             catch (IOException e)
             {
-                SLog.DebugFormat("Could not write file {0}, {1}",e);
+                SLog.DebugFormat("Could not write file {0}, {1}",path,e);
             }
         }
 
@@ -162,7 +160,7 @@ namespace DataAccess.Util
 
         void CreateDirectory(string directory)
         {
-            var path = directory;
+            var path = String.Format("{0}{1}",GetCurrentDirectory(), directory);
             var directoryInfo = new DirectoryInfo(path);
             if (!directoryInfo.Exists)
             {
@@ -190,5 +188,10 @@ namespace DataAccess.Util
             }
         }
         #endregion
+
+        static string GetCurrentDirectory()
+        {
+            return Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
+        }
     }
 }

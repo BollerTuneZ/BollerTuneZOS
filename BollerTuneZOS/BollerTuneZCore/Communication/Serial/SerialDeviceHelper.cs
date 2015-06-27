@@ -35,9 +35,14 @@ namespace Communication.Serial
         void Discover()
         {
             _blackList = new List<string>();
+            string[] avaiblePorts = SerialPort.GetPortNames();
+            foreach (var avaiblePort in avaiblePorts)
+            {
+                SLog.DebugFormat("Avaible Serial Port {0}",avaiblePort);
+            }
             while (true)
             {
-                string[] avaiblePorts = SerialPort.GetPortNames();
+                 avaiblePorts = SerialPort.GetPortNames();
 
                 foreach (var avaiblePort in avaiblePorts)
                 {
@@ -67,6 +72,7 @@ namespace Communication.Serial
                 port.Write(detectMessage,0,detectMessage.Length);
                 Thread.Sleep(1000);
                 int count = port.BytesToRead;
+                SLog.DebugFormat("BytesToRead {0}",count);
                 string returnMessage = "";
                 int intReturnASCII = 0;
                 while (count > 0)

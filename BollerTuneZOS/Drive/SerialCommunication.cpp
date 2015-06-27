@@ -26,6 +26,7 @@ void SerialCommunicationClass::init()
 			}
 			Serial.println(IDENTITY);
 			_log.Log(LOG_LEVEL_INFO, "Host found");
+			delay(1000);
 			break;
 
 		}

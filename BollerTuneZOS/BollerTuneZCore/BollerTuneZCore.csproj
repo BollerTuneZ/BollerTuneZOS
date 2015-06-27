@@ -78,6 +78,10 @@
       <Project>{FB2C926F-E904-46C3-AB73-91B5FDAFC481}</Project>
       <Name>Plugin.Infrastructure</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Services\Services.csproj">
+      <Project>{9EA84C32-2410-4433-B0F6-4CE04882A359}</Project>
+      <Name>Services</Name>
+    </ProjectReference>
     <ProjectReference Include="Communication\Communication.csproj">
       <Project>{E8F26B21-5324-42FD-A4AC-6C183D590D8B}</Project>
       <Name>Communication</Name>
