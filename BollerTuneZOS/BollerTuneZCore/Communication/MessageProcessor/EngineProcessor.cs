@@ -25,12 +25,23 @@ namespace Communication.MessageProcessor
 	    private volatile int _speed;
 	    private volatile byte _direction;
 	    private EngineSettings _settings;
+        #if DEBUG
+	    private System.Timers.Timer _readLogAction;
+        #endif
 
 
-	    public EngineProcessor(ISettingsRepository settingsRepository)
+        public EngineProcessor(ISettingsRepository settingsRepository)
 	    {
 	        _settingsRepository = settingsRepository;
 	        _settings = _settingsRepository.RetriveEngineSettings();
+            #if DEBUG
+            _readLogAction.Elapsed += OnreadLogElapsed;
+            #endif
+	    }
+
+	    private void OnreadLogElapsed(object sender, ElapsedEventArgs elapsedEventArgs)
+	    {
+
 	    }
 
 	    /*Constante*/
