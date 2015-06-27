@@ -141,7 +141,7 @@ namespace DataAccess.Util
             }
             catch (IOException e)
             {
-                SLog.DebugFormat("Could not write file {0}, {1}",e);
+                SLog.DebugFormat("Could not write file {0}, {1}",path,e);
             }
         }
 
