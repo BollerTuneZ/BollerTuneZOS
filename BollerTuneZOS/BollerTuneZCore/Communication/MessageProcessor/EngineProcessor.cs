@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Threading;
 using System.Timers;
+using Btz.Debugging;
 using Communication.Infrastructure;
 using Communication.Infrastructure.MessageProcessor;
 using Data.Settings;
@@ -36,12 +37,14 @@ namespace Communication.MessageProcessor
 	        _settings = _settingsRepository.RetriveEngineSettings();
             #if DEBUG
             _readLogAction.Elapsed += OnreadLogElapsed;
+            _readLogAction.Interval = 100;
+            
             #endif
 	    }
 
 	    private void OnreadLogElapsed(object sender, ElapsedEventArgs elapsedEventArgs)
 	    {
-
+	        LogBtzArduino.Log(_socket.ReceiveData());
 	    }
 
 	    /*Constante*/
@@ -53,6 +56,9 @@ namespace Communication.MessageProcessor
 	    public void Initialize(IBTZSocket socket)
 	    {
 	        _socket = socket;
+#if DEBUG
+            _readLogAction.Start();
+#endif
 	    }
 
 	    public void Start()
