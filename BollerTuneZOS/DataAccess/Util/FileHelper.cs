@@ -70,8 +70,7 @@ namespace DataAccess.Util
 
         public string ReadSteeringSettingsFile()
         {
-            var currentDirectory = Environment.CurrentDirectory;
-            var filePath = String.Format("{0}{1}", currentDirectory, SteeringSettingsFilePath);
+            var filePath = String.Format("{0}{1}", GetCurrentDirectory(), SteeringSettingsFilePath);
             return ReadFile(filePath);
         }
         #endregion
@@ -79,15 +78,13 @@ namespace DataAccess.Util
         #region Engine Settings
         public void WriteEngineSettingsFile(string content)
         {
-            var currentDirectory = Environment.CurrentDirectory;
-            var filePath = String.Format("{0}{1}", currentDirectory, EngineSettingsFilePath);
+            var filePath = String.Format("{0}{1}", GetCurrentDirectory(), EngineSettingsFilePath);
             WriteFile(filePath, content);
         }
 
         public string ReadEngineSettingsFile()
         {
-            var currentDirectory = Environment.CurrentDirectory;
-            var filePath = String.Format("{0}{1}", currentDirectory, EngineSettingsFilePath);
+            var filePath = String.Format("{0}{1}", GetCurrentDirectory(), EngineSettingsFilePath);
             return ReadFile(filePath);
         }
         #endregion
@@ -163,7 +160,7 @@ namespace DataAccess.Util
 
         void CreateDirectory(string directory)
         {
-            var path = String.Format("{0}{1}", Path.GetDirectoryName(Assembly.GetEntryAssembly().Location), directory);
+            var path = String.Format("{0}{1}",GetCurrentDirectory(), directory);
             var directoryInfo = new DirectoryInfo(path);
             if (!directoryInfo.Exists)
             {
@@ -191,5 +188,10 @@ namespace DataAccess.Util
             }
         }
         #endregion
+
+        static string GetCurrentDirectory()
+        {
+            return Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
+        }
     }
 }
