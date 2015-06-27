@@ -3,7 +3,7 @@ var socket = io.connect();
 $(document).ready(function(){
 
  		
-	RestoreSettingsDOM();
+	/* RestoreSettingsDOM(); */
 	
 	
 		socket.on('StartService', function() {
