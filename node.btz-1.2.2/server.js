@@ -125,7 +125,10 @@ console.log("Motor Speed");
 		
 		socket.on('SteeringMotorConfigDOM', function (data) {
 			io.sockets.emit('SteeringMotorConfigDOM', { SteeringSpeedMax_MaxDOM: data.SteeringSpeedMax_MaxDOM , SteeringSpeedMax_MinDOM: data.SteeringSpeedMax_MinDOM , SteeringSpeedMin_MaxDOM: data.SteeringSpeedMin_MaxDOM , SteeringSpeedMin_MinDOM: data.SteeringSpeedMin_MinDOM });
-			
+			console.log(data.SteeringSpeedMax_MaxDOM);
+			console.log(data.SteeringSpeedMax_MinDOM);
+			console.log(data.SteeringSpeedMin_MaxDOM);
+			console.log(data.SteeringSpeedMin_MinDOM);
 		});
 		
 
