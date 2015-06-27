@@ -1,0 +1,80 @@
+SteeringConfig({SteeringRangeMax,SteeringRangeMin,SteeringCenter,SteeringToleranz});
+LenkungMax int
+LenkungMin int
+LenkungCenter int
+toleranz
+
+
+SteeringMotorConfig({SteeringSpeedMin,SteeringSpeedMax});
+LenkmotorSpeedMin int
+LenkmotorSpeedMax int
+
+
+
+EngineConfig({EngineSpeedStartMin,EngineSpeedMax,EngineRampTime});
+
+
+StartService();
+
+
+StopService();
+
+
+SaveSettings();
+
+RestoreSettings();
+
+
+
+EngineConfig
+
+	EngineSpeedMaxLabel
+	EngineSpeedMax
+	EngineRampTime
+	EngineRampTimeLabel
+	EngineSpeedStartMin
+	EngineSpeedStartMinLabel
+	EngineRampTime
+	EngineRampTimeLabel
+	
+	
+	
+	Button Sendet Leer RestoreSettings(); darauf möchte ich eine antwort mit über 
+	EngineConfigDOM, SteeringConfigDOM und SteeringMotorConfigDOM mit den daten haben alles andere läuft schon.
+	
+	
+EngineConfigDOM
+
+	data.EngineSpeedMax_MaxDOM
+	data.EngineSpeedMax_MinDOM
+	
+	
+	data.EngineRampTime_MaxDOM
+	data.EngineRampTime_MinDOM
+		
+	data.EngineSpeedStartMin_MaxDOM
+	data.EngineSpeedStartMin_MinDOM
+		
+SteeringConfigDOM
+
+	data.SteeringRangeMax_MaxDOM
+	data.SteeringRangeMax_MinDOM
+	
+	data.SteeringRangeMin_MaxDOM
+	data.SteeringRangeMin_MinDOM
+		
+	data.SteeringCenter_MaxDOM
+	data.SteeringCenter_MinDOM
+		
+	data.SteeringToleranz_MaxDOM
+	data.SteeringToleranz_MinDOM
+	
+SteeringMotorConfigDOM		
+		
+	data.SteeringSpeedMax_MaxDOM
+	data.SteeringSpeedMax_MinDOM
+	
+	data.SteeringSpeedMin_MaxDOM
+	data.SteeringSpeedMin_MinDOM
+	
+	
