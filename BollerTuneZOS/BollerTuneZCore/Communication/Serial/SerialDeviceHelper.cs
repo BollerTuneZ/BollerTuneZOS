@@ -35,9 +35,14 @@ namespace Communication.Serial
         void Discover()
         {
             _blackList = new List<string>();
+            string[] avaiblePorts = SerialPort.GetPortNames();
+            foreach (var avaiblePort in avaiblePorts)
+            {
+                SLog.DebugFormat("Avaible Serial Port {0}",avaiblePort);
+            }
             while (true)
             {
-                string[] avaiblePorts = SerialPort.GetPortNames();
+                 avaiblePorts = SerialPort.GetPortNames();
 
                 foreach (var avaiblePort in avaiblePorts)
                 {
