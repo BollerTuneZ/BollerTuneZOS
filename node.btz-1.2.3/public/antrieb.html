@@ -8,13 +8,12 @@
 		<script src="jquery.min.js"></script>
 		<script src="client.js"></script>
 		<script src="engine.js"></script>
-		<script src="steering.js"></script>
+		
 		<script src="js/bootstrap.js"></script>
   <meta name="viewport" content="width=device-width">
   <script src="../lib/jquery-1.7.2.min.js"></script>
   <link href="styles.css" rel="stylesheet">
 </head>
-
 
 
 	<body>
@@ -29,9 +28,9 @@
       </div>
       <div class="collapse navbar-collapse">
         <ul class="nav navbar-nav nav-justified">
-          <li class="active"><a href="index">Übersicht</a></li>
+          <li ><a href="index">Übersicht</a></li>
           <li><a href="lenkung">Lenkung</a></li>
-          <li><a href="antrieb">Antrieb</a></li>
+          <li class="active"><a href="antrieb">Antrieb</a></li>
           <li><a href="steuerung">Steuerung</a></li>
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Mehr <b class="caret"></b></a>
@@ -44,8 +43,7 @@
           </li>
         </ul>
       </div><!--/.nav-collapse -->
-     
-     <br>
+       <br>
      <div class="btn-custom">
      	<input id="StartService" class="btn btn-custom" type="button" value="Start" style="width: 100px ; height: 40px; "/>
 					
@@ -55,17 +53,18 @@
 						
 		<input id="RestoreSettings" class="btn btn-custom" type="button" value="Neu Laden" style="width: 100px ; height: 40px"/>
      </div>
-					<br>	
-	
+					<br>
     </div><!--/.container -->
-    
 </div><!--/.navbar -->
+
         
         			
-         		
+         
+           
 		
-	<div class="container" >
-	
+		
+	<div class="container">
+		
 			<div class="col-sm-12 col-xs-12 col-md-6 col-lg-4">
 				<div class="panel panel-default">	
 				
@@ -109,56 +108,10 @@
 						
 					</div>
 				</div>
-		</div>	
-			
-	
-		
-			<div class="col-sm-12 col-xs-12 col-md-6 col-lg-4">
-				<div class="panel panel-default">	
-				
-					<div class="center-block col-md-12">
-					
-						<center><h2>Lenkung</h2></center>
-						
-						<div class="panel">
-							
-							<div class="col-sx-3 col-sm-3 col-md-6 col-lg-6 ">
-							<p>Lenkung Max </p>	
-							</div>
-							<div class="col-sx-3 col-sm-3 col-md-6 col-lg-6"
-							<label id="LenkungMaxLabel">0</label> 
-							</div>
-							<input id="LenkungMax" type="range"  min="-20" max="20"/>
-						</div>
-						
-						<div class="panel ">
-							<div class="col-sx-3 col-sm-3 col-md-6 col-lg-6 ">
-							<p>Lenkung Min </p>	
-							</div>
-							<div class="col-sx-3 col-sm-3 col-md-6 col-lg-6"
-							<label id="LenkungMinLabel">0</label> 
-							</div>
-							<input id="LenkungMin" type="range"  min="-20" max="20"/>	
-						</div>
-							
-							
-							
-						<div class="panel">
-							
-							<div class="col-sx-3 col-sm-3 col-md-6 col-lg-6 ">
-							<p>Lenkung Center </p>	
-							</div>
-							<div class="col-sx-3 col-sm-3 col-md-6 col-lg-6"
-							<label id="LenkungCenterLabel">0</label> 
-							</div>
-							<input id="LenkungCenter" type="range"  min="-20" max="20"/>
-						</div>
-						
-					</div>
-				</div>
 		</div>
 		
-			<div class="col-sm-12 col-xs-12 col-md-6 col-lg-4">
+	<!--	
+		<div class="col-sm-12 col-xs-12 col-md-6 col-lg-4">
 				<div class="panel panel-default">	
 					<div class="center-block col-md-12 col-lg-12">
 					<center><h2>Lenkmotor Speed</h2></center>
@@ -186,19 +139,12 @@
 						<input id="Geber1" type="range" value="0" min="0" max="7000"/>		
 						<p>Geber 2</p>	
 						<input id="Geber2" type="range" value="0" min="0" max="7000"/>
-						
-						
-						
 					</div>
 				</div>
 		</div>	
 		
-				
-		
-	
 	</div>	
-						
-				
+	-->
 	
 	
 	
@@ -214,16 +160,4 @@ LenkungCenter int
 LenkmotorSpeedMin int
 LenkmotorSpeedMax int
 toleranz 0-100%
-
-
-
-
-
-
-
-
-
-
-
-
 -->
