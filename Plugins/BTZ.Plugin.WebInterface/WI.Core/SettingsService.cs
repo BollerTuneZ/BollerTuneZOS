@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using Plugin.Data;
 using Plugin.Infrastructure.API.DataAccess;
 using WebSocket4Net;
@@ -49,7 +50,28 @@ namespace WI.Core
         {
             _steeringSettingsRemote = _settingsRepository.LoadSteeringSettings();
             _socket = IO.Socket("http://192.168.2.118:8080");
-            _socket.On(Socket.EVENT_ERROR, (data) => Console.WriteLine("WebInterface Socket Error {0}",data));
+            _socket.On(Socket.EVENT_ERROR, (data) =>Console.WriteLine("WebInterface Socket Error {0}",data));
+            _socket.On(Socket.EVENT_CONNECT,
+                () =>
+                {
+                    EngineSpeedRangeDto obj = new EngineSpeedRangeDto
+                    {
+                        SteeringSpeedMax_MaxDOM = 100,
+                        SteeringSpeedMax_MinDOM = -100,
+                        SteeringSpeedMin_MaxDOM = 100,
+                        SteeringSpeedMin_MinDOM = -100
+                    };
+                    var jObj = new JObject
+                        {
+                            {"SteeringSpeedMax_MaxDOM", 10000},
+                            {"SteeringSpeedMax_MinDOM", -10000},
+                            {"SteeringSpeedMin_MaxDOM", 10000},
+                            {"SteeringSpeedMin_MinDOM", -10000},
+                        };
+                    JObject jObject = JObject.FromObject(obj);
+                    _socket.Emit("SteeringMotorConfigDOM", jObj);
+                    Console.WriteLine("Send SteeringMotorConfigDOM");
+                });
             _actionSteeringConfig = OnSteeringConfig;
             _socket.On("SteeringConfig", _actionSteeringConfig);
             _actionSteeringMotorConfig = OnSteeringMotorConfig;
