@@ -33,3 +33,5 @@ $tf*/
 *.cs.orig
 *.js.orig
 [Pp]ackages
+*.Drive.vsarduino.h
+*.Steering.vsarduino.h
