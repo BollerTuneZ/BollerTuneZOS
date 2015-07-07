@@ -7,7 +7,7 @@ $(document).ready(function(){
 	
 
 	document.body.onkeydown = function(e){
-    //String.fromCharCode(w.keyCode)
+   
     	if (e.keyCode==87) {
     	
     	
