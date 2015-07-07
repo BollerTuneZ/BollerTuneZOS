@@ -78,3 +78,14 @@ SteeringMotorConfigDOM
 	data.SteeringSpeedMin_MinDOM
 	
 	
+	
+	
+	
+Geo Data 
+
+
+
+geodata
+
+	socket.emit('geodata', { latitude: lat, longitude: lng, ip:ip });
+	

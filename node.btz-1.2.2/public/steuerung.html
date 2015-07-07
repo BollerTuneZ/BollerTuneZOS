@@ -7,15 +7,28 @@
 		<script src="socket.io/socket.io.js"></script>
 		<script src="jquery.min.js"></script>
 		<script src="client.js"></script>
+		<script src="controll.js"></script>
+		
 <!-- 		<script src="engine.js"></script> -->
 <!-- 		<script src="steering.js"></script> -->
 		<script src="js/bootstrap.js"></script>
+<!-- 		<script src="http://maps.google.com/maps/api/js?v=3&sensor=false" type="text/javascript"></script> -->
+		<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true"></script>
+<script src="maps.js"></script>
   <meta name="viewport" content="width=device-width">
   <script src="../lib/jquery-1.7.2.min.js"></script>
   <link href="styles.css" rel="stylesheet">
+   <style>
+      html, body, #map-canvas {
+        height: 100%;
+        margin: 0px;
+        padding: 0px
+      }
+    </style>
 </head>
 
 	<body>
+<div id="doc">	
 		<div class="navbar navbar-custom navbar-inverse navbar-static-top" id="nav">
     <div class="container">
       <div class="navbar-header">
@@ -52,6 +65,11 @@
 		<input id="SaveSettings" class="btn btn-custom" type="button" value="Speichern" style="width: 100px ; height: 40px"/>
 						
 		<input id="RestoreSettings" class="btn btn-custom" type="button" value="Neu Laden" style="width: 100px ; height: 40px"/>
+		
+		<input id="geostart" class="btn btn-custom" type="button" value="Live Tracking" style="width: 100px ; height: 40px"/>
+
+		<input id="geoend" class="btn btn-custom" type="button" value="No Tracking" style="width: 100px ; height: 40px"/>
+
      </div>
 					<br>
     </div><!--/.container -->
@@ -74,12 +92,12 @@
 						
 						<div class="panel">
 							<center>
-							<input id="w" type="button" value="13" style="width: 100px ; height: 100px"/>
+							<input id="w" type="button" value="Vor" style="width: 100px ; height: 100px"/>
 							</center>
 							<center>
-							<input id="a" type="button" style="width: 100px ; height: 100px"/>
-<input id="s" type="button"  style="width: 100px ; height: 100px"/>
-<input id="d" type="button"  style="width: 100px ; height: 100px"/>
+							<input id="a" type="button" value="Links" style="width: 100px ; height: 100px"/>
+							<input id="s" type="button" value="Zurück" style="width: 100px ; height: 100px"/>
+							<input id="d" type="button" value="Rechts" style="width: 100px ; height: 100px"/>
 							</center></div>
 							
 						<!--
@@ -96,6 +114,18 @@
 -->
 						
 					</div>
+				</div>
+		</div>
+		
+		<div class="col-sm-12 col-xs-12 col-md-6 col-lg-4">
+				<div class="panel panel-default">	
+					<div id="showgeo" class="center-block col-md-12 col-lg-12">
+								
+				    
+
+					</div>
+					
+										
 				</div>
 		</div>
 		
@@ -138,9 +168,12 @@
 		
 	</div>	
 	
+
+
 	
 	
-	
+</div>
+	<div id="map-canvas"></div>
 	</body>
 </html>
 
