@@ -89,13 +89,12 @@ extern "C" void __cxa_pure_virtual() {;}
 #include <Command.cpp>
 #include <Command.h>
 #include <Config.h>
+#include <EthernetSocket.cpp>
+#include <EthernetSocket.h>
 #include <Log.cpp>
 #include <Log.h>
 #include <MotorHandler.cpp>
 #include <MotorHandler.h>
-#include <SerialCommunication.cpp>
-#include <SerialCommunication.h>
-#include <SerialCommunicationConstants.h>
 #include <SteeringHandler.cpp>
 #include <SteeringHandler.h>
 #endif

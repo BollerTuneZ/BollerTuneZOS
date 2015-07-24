@@ -14,4 +14,7 @@
 #define COM_DEFAULT SERIAL
 
 #define COM_CURRENT COM_DEFAULT
+
+#define IDENTITY "Steering"
+
 #endif

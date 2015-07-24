@@ -1,9 +1,15 @@
+#include <EthernetUdp.h>
+#include <EthernetServer.h>
+#include <EthernetClient.h>
+#include <Ethernet.h>
+#include <Dns.h>
+#include <Dhcp.h>
+#include "EthernetSocket.h"
 #include "Log.h"
 #include <Encoder.h>
 #include "SteeringHandler.h"
 #include "MotorHandler.h"
 #include "Command.h"
-#include "SerialCommunication.h"
 #include "Board.h"
 #include "Config.h"
 /*
@@ -12,7 +18,6 @@
  Author:	Developer
 */
 
-SerialCommunicationClass _comSerial;
 MotorHandlerClass _motorHandler;
 SteeringHandlerClass _steeringHandler;
 LogClass _log;
@@ -20,10 +25,6 @@ LogClass _log;
 void setup() {
 	//Auswahl der Kommunikation
 	_log.init("Main");
-	if (COM_CURRENT == SERIAL) //Serielle Schnittstelle wird benuntz
-	{
-		_comSerial.init();
-	}
 	_log.Log(LOG_LEVEL_INFO, "Initialize Motorhandler");
 	_motorHandler.init(); 
 }
@@ -31,14 +32,6 @@ void setup() {
 // the loop function runs over and over again until power down or reset
 void loop() {
 	CommandClass tempCommand;
-	if (COM_CURRENT == SERIAL)
-	{
-		tempCommand = _comSerial.Receive();
-	}
-	if (tempCommand.isBadCommand != 't')
-	{
-		ExecuteCommand(tempCommand);
-	}
 	_motorHandler.Steer();
 	_steeringHandler.Refresh();
 	SendPositionMessage();
@@ -52,7 +45,6 @@ void SendPositionMessage()
 		+ String(_steeringHandler.PositionSteering)
 		+ "/"
 		+ String(_steeringHandler.PositionMotor);
-	_comSerial.Send(message);
 }
 
 void ExecuteCommand(CommandClass command)
