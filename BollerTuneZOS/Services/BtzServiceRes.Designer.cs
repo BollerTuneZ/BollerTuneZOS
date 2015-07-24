@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Services {
+namespace Btz.Services {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace Services {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Services.BtzServiceRes", typeof(BtzServiceRes).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Btz.Services.BtzServiceRes", typeof(BtzServiceRes).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

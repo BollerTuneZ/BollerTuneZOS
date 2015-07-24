@@ -24,7 +24,7 @@ namespace BollerTuneZCore.Processors
         private static readonly ILog SLog = LogManager.GetLogger(typeof (SteeringProcessor));
         private Thread _steeringThread;
         private readonly ISettingsRepository _settingsRepository;
-        private IBTZSocket _socket;
+        private IBtzSocket _socket;
         private object _lockObject = new object();
         private object _serialLock = new object();
         private volatile int _remotePosition;
@@ -40,7 +40,7 @@ namespace BollerTuneZCore.Processors
             _settings = _settingsRepository.RetriveSteeringSettings();
         }
 
-        public void Initialize(IBTZSocket socket)
+        public void Initialize(IBtzSocket socket)
         {
             _socket = socket;
             _steeringThread = new Thread(SteeringService);

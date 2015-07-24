@@ -12,7 +12,7 @@ using Infrastructure.Services;
 using Infrastructure.Util;
 using log4net;
 
-namespace Services.BollerTuneZ
+namespace Btz.Services
 {
     /// <summary>
     /// Aktuelle Service Klasse für den Bollerwagen aus 2015
@@ -26,8 +26,8 @@ namespace Services.BollerTuneZ
         private readonly ISteeringProcessor _steeringProcessor;
         private readonly IBtzJoyStickController _joyStickController;
         private readonly IArgumentTranslator _argumentTranslator;
-        private IBTZSocket _engineSocket;
-        private IBTZSocket _steeringSocket;
+        private IBtzSocket _engineSocket;
+        private IBtzSocket _steeringSocket;
         private volatile bool _socketsConnected;
         private SteeringSettings _steeringSettings;
         BtzArgument _networkType;

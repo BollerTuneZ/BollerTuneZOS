@@ -4,7 +4,7 @@
     /// Allgemeine Schnittstelle für Kommunikationssockets
     /// Jonas Ahlf 19.06.2015 18:33:29
     /// </summary>
-    public interface IBTZSocket
+    public interface IBtzSocket
     {
         /// <summary>
         /// Versendet Daten

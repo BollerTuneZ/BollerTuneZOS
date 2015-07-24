@@ -22,7 +22,7 @@ namespace Communication
 			while (true)
 			{
 				var remoteEP = new IPEndPoint(IPAddress.Any, port); 
-				var data = udpServer.Receive(ref remoteEP); // listen on port 11000
+				var data = udpServer.Receive(ref remoteEP); 
 				OnReveicedData(this,new DataEventArgs(){Data = data});
 			}
 		}

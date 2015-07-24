@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Util
 {
+    /// <summary>
+    /// Jonas Ahlf 01.07.2015 21:48:23
+    /// </summary>
     public static class MathHelper
     {
         public static decimal Map(this decimal value, decimal fromSource, decimal toSource, decimal fromTarget, decimal toTarget)

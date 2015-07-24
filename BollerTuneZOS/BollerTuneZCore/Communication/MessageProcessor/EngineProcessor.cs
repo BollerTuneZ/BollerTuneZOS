@@ -16,7 +16,7 @@ namespace Communication.MessageProcessor
 	public class EngineProcessor : IEngineProcessor
 	{
 	    private ISettingsRepository _settingsRepository;
-	    private static IBTZSocket _socket;
+	    private static IBtzSocket _socket;
 	    private static readonly ILog SLog = LogManager.GetLogger(typeof (EngineProcessor));
 	    private Thread _driveThread;
         private object _speedLock = new object();
@@ -53,7 +53,7 @@ namespace Communication.MessageProcessor
         private const byte DirectionNon = 0x00;
 
 
-	    public void Initialize(IBTZSocket socket)
+	    public void Initialize(IBtzSocket socket)
 	    {
 	        _socket = socket;
 #if DEBUG

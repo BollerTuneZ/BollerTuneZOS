@@ -11,7 +11,7 @@ namespace Communication.Serial
     /// Über diese klasse kann mit dem Gerät Kommuniziert werden
     /// Jonas Ahlf 19.06.2015 17:22:31
     /// </summary>
-    public class SerialDevice : IBTZSocket
+    public class SerialDevice : IBtzSocket
     {
         private static readonly ILog SLog = LogManager.GetLogger(typeof (SerialDevice));
 

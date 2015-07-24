@@ -34,9 +34,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Ethernet\EthernetDevice.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="MessageProcessor\BaseMessageProcessor.cs" />
-    <Compile Include="MessageProcessor\ArduinoMessageProcessor.cs" />
     <Compile Include="Serial\EventArgsDeviceFound.cs" />
     <Compile Include="Serial\SerialDevice.cs" />
     <Compile Include="Serial\SerialDeviceHelper.cs" />

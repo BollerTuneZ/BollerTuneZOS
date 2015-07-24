@@ -1,12 +1,10 @@
-﻿using System;
-using Communication.Infrastructure;
-using System.Net;
+﻿using System.Net;
 using System.Net.Sockets;
+using Communication.Infrastructure;
 
-
-namespace Communication
+namespace Communication.Services
 {
-	public class UDPClientService : IUDPClientService
+	public class UdpClientService : IUDPClientService
 	{
 		const byte StartByte = 0x01;
 		const byte EndByte = 0xDE;
@@ -14,7 +12,7 @@ namespace Communication
 		int hostPort = 0;
 		private IPEndPoint RemoteEndPoint;
 		Socket server;
-		public UDPClientService ()
+		public UdpClientService ()
 		{
 		}
 

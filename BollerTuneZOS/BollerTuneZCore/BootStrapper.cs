@@ -4,6 +4,7 @@ using BollerTuneZCore.Processors;
 using Communication.Infrastructure.MessageProcessor;
 using Communication.MessageProcessor;
 using Communication.Serial;
+using Communication.Services;
 using DataAccess.Addon;
 using DataAccess.Repositories;
 using Infrastructure.Communication;
@@ -14,15 +15,13 @@ using Infrastructure.Main;
 using Infrastructure.Plugin;
 using Infrastructure.Services;
 using Plugin.Infrastructure.API.DataAccess;
-using Services.BollerTuneZ;
 using TinyIoC;
 using Communication.Infrastructure;
 using Communication;
 using Infrastructure;
 using JoystickApi;
 using Testing;
-
-
+using Btz.Services;
 namespace BollerTuneZCore
 {
 	public static class BootStrapper
@@ -34,7 +33,7 @@ namespace BollerTuneZCore
 		{
 			//TinyIoCContainer.Current.Register<INetworkConfig,NetworkConfig> ();
 			TinyIoCContainer.Current.Register<IMessagePacker,MessagePacker> ();
-			TinyIoCContainer.Current.Register<IUDPClientService,UDPClientService> ().AsMultiInstance();
+			TinyIoCContainer.Current.Register<IUDPClientService,UdpClientService> ().AsMultiInstance();
 			TinyIoCContainer.Current.Register<IUDPService,UDPService> ();
 			TinyIoCContainer.Current.Register<IJoyStickHandler,JoyStickHandler> ();
 			TinyIoCContainer.Current.Register<IBtzJoyStickController,BTZJoyStickController> ();

@@ -22,8 +22,8 @@ namespace BTZ.Tests
         public event EventHandler OnTestFinish;
         private static readonly ILog SLog = LogManager.GetLogger(typeof (CommunicationTest)); 
         private ISerialDeviceHelper _deviceHelper;
-        private IBTZSocket _steeringSocket;
-        private IBTZSocket _engineSocket;
+        private IBtzSocket _steeringSocket;
+        private IBtzSocket _engineSocket;
         private object DeviceLock = new object();
         private volatile bool _devicesFound = false;
 
