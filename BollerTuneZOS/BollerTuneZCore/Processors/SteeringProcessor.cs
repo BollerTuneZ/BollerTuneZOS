@@ -39,9 +39,8 @@ namespace BollerTuneZCore.Processors
             _settings = _settingsRepository.RetriveSteeringSettings();
         }
 
-        public void Initialize(IBTZSocket socket)
+        public void Initialize()
         {
-            _socket = socket;
             _steeringThread = new Thread(SteeringService);
         }
 

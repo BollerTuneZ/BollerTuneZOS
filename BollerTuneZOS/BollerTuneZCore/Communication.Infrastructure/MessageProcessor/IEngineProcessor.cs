@@ -4,7 +4,7 @@ namespace Communication.Infrastructure.MessageProcessor
 {
 	public interface IEngineProcessor
 	{
-	    void Initialize(IBTZSocket socket);
+	    void Initialize();
 	    void Start();
 	    void Stop();
 	    void SetSpeed(int speed);

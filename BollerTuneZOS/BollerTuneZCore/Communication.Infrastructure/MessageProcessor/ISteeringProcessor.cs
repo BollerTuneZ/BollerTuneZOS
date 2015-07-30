@@ -11,7 +11,7 @@ namespace Communication.Infrastructure.MessageProcessor
         /// Initialisiert den Lenkprocessor mit dem angebenen verbindungssocket
         /// </summary>
         /// <param name="socket"></param>
-        void Initialize(IBTZSocket socket);
+        void Initialize();
         /// <summary>
         /// Startet den Lenkungsservice
         /// </summary>

@@ -39,9 +39,9 @@ namespace Communication.MessageProcessor
         private const byte DirectionNon = 0x00;
 
 
-	    public void Initialize(IBTZSocket socket)
+	    public void Initialize()
 	    {
-	        _socket = socket;
+	       // _socket = socket;
 	    }
 
 	    public void Start()

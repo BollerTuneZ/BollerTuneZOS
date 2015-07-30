@@ -12,6 +12,9 @@ namespace Data.Settings
     /// </summary>
     public class SteeringSettings
     {
+
+        public string EncoderServiceIpAdress { get; set; }
+        public int EncoderServicePort;
         /// <summary>
         /// Gibt an ob nach einem neustart die daten geladen werden sollen
         /// </summary>
