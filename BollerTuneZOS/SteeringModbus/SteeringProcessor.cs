@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using Communication.Infrastructure.MessageProcessor;
@@ -20,10 +21,12 @@ namespace SteeringModbus
     public class SteeringProcessor : ISteeringProcessor
     {
 
-        private static readonly ILog SLog = LogManager.GetLogger(typeof (SteeringProcessor));
+        private static readonly ILog SLog = LogManager.GetLogger(typeof(SteeringProcessor));
         private readonly ISettingsRepository _settingsRepository;
-        private SteeringSettings _steeringSettings;
+        private readonly SteeringSettings _steeringSettings;
         private EncoderClientService _encoderService;
+        private static bool _isConnected;
+
 
         public SteeringProcessor(ISettingsRepository settingsRepository)
         {
@@ -33,34 +36,46 @@ namespace SteeringModbus
 
         public void Initialize()
         {
-            SLog.Debug("Initialize Steering Processor(fake)");
+            SLog.Debug("Initialize Steering Processor");
             _encoderService = new EncoderClientService();
             _encoderService.OnEncoderDataReceived += OnEncoderDataReceived;
         }
 
         public void Start()
         {
-            throw new NotImplementedException();
+            SLog.DebugFormat("Start SteeringProcessor");
+            if (!_isConnected)
+            {
+                SLog.DebugFormat("Connecting to encoderservice");
+                _isConnected = _encoderService.Connect(IPAddress.Parse(_steeringSettings.EncoderServiceIpAdress),_steeringSettings.EncoderServicePort)
+                if (!_isConnected)
+                {
+                    SLog.ErrorFormat("Could not connect to encoderservice {0}:{1}", _steeringSettings.EncoderServiceIpAdress, _steeringSettings.EncoderServicePort);
+                    return;
+                }
+            }
+            _encoderService.RunService();
         }
 
         public void Stop()
         {
-            throw new NotImplementedException();
+            SLog.DebugFormat("Stop SteeringProcessor");
+            _encoderService.StopService();
         }
 
         public void SetPosition(int position)
         {
-            throw new NotImplementedException();
+            SLog.DebugFormat("Set position to:{0}", position);
         }
 
         public void SetEnabled(bool enabled)
         {
-            SLog.DebugFormat("Enabled set to {0}",enabled);
+            SLog.DebugFormat("Enabled set to {0}", enabled);
         }
 
         public void SetEncoderPosition(EncoderType encoderType, int position)
         {
-            SLog.DebugFormat("Set Encoder {0} to {1}", encoderType,position);
+            SLog.DebugFormat("Set Encoder {0} to {1}", encoderType, position);
             switch (encoderType)
             {
                 case EncoderType.Steering:
@@ -77,7 +92,7 @@ namespace SteeringModbus
         #region Events
         private void OnEncoderDataReceived(EncoderData data)
         {
-            throw new NotImplementedException();
+
         }
         #endregion
 

@@ -50,6 +50,14 @@
       <Project>{5A482D12-1CF1-4BC9-ADFE-8D63E1E69D99}</Project>
       <Name>Communication.Infrastructure</Name>
     </ProjectReference>
+    <ProjectReference Include="..\BollerTuneZCore\Infrastructure\Infrastructure.csproj">
+      <Project>{941264CC-5E1C-4BA8-A441-CEF9B7159CAF}</Project>
+      <Name>Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Data\Data.csproj">
+      <Project>{80A624AE-E11C-4193-8F4B-73CE77C022A6}</Project>
+      <Name>Data</Name>
+    </ProjectReference>
     <ProjectReference Include="..\EncoderClient\EncoderClient.csproj">
       <Project>{e99b32b4-19de-4cdc-85ce-b2e717354f3f}</Project>
       <Name>EncoderClient</Name>
