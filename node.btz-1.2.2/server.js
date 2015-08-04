@@ -7,6 +7,28 @@ var express = require('express')
 // Daten
 
 
+var SteeringConfig = {
+    SteeringRangeMax: 0 ,
+    SteeringRangeMin: 0 ,
+    SteeringCenter: 0 ,
+    SteeringToleranz: 0
+};
+ 
+var SteeringMotorConfig = {
+	SteeringSpeedMax: 0 , 
+	SteeringSpeedMin: 0
+	
+};
+
+var EngineConfig = {
+	EngineSpeedStartMin: 0 , 
+	EngineSpeedMax: 0,
+	EngineRampTime: 0
+	
+};
+
+
+
 // Webserver
 // auf den Port x schalten
 server.listen(conf.port);
@@ -54,15 +76,33 @@ var x = 0;
 // Websocket
 io.sockets.on('connection', function (socket) {
 
-		
-		
-					
 		// der Client ist verbunden
+		
+		
+		// socket.id wird ausgelesen und in der console ausgegeben 
+		var sessionid = socket.id;
+		console.log(sessionid);
+		
+		
+		// wenn ein neuer Client verbunden ist wird ihm jäglicher inhalt einmal zugesendet 
+		io.sockets.emit('SteeringConfig', { SteeringRangeMax: SteeringConfig.SteeringRangeMax , SteeringRangeMin: SteeringConfig.SteeringRangeMin, SteeringCenter: SteeringConfig.SteeringCenter, SteeringToleranz: SteeringConfig.SteeringToleranz });
+					
+		
+		io.sockets.emit('SteeringMotorConfig', { SteeringSpeedMax: SteeringMotorConfig.SteeringSpeedMax, SteeringSpeedMin: SteeringMotorConfig.SteeringSpeedMin });
+		
+		
+		
+		io.sockets.emit('EngineConfig', { EngineSpeedStartMin: EngineConfig.EngineSpeedStartMin, EngineSpeedMax: EngineConfig.EngineSpeedMax, EngineRampTime: EngineConfig.EngineRampTime });
+	
+		
 		socket.on('SteeringConfig', function (data) {
 			// so wird dieser Text an alle anderen Benutzer gesendet
-			x = data.LenkMax;
+			SteeringConfig.SteeringRangeMax = data.SteeringRangeMax;
+			SteeringConfig.SteeringRangeMin = data.SteeringRangeMin;
+			SteeringConfig.SteeringCenter = data.SteeringCenter;
+			SteeringConfig.SteeringToleranz = data.SteeringToleranz;
 			
-			io.sockets.emit('SteeringConfig', { SteeringRangeMax: data.SteeringRangeMax , SteeringRangeMin: data.SteeringRangeMin, SteeringCenter: data.SteeringCenter, SteeringToleranz: data.SteeringToleranz });
+			io.sockets.emit('SteeringConfig', { SteeringRangeMax: SteeringConfig.SteeringRangeMax , SteeringRangeMin: SteeringConfig.SteeringRangeMin, SteeringCenter: SteeringConfig.SteeringCenter, SteeringToleranz: SteeringConfig.SteeringToleranz });
 			
 		/*
 	console.log("Lenkung");
@@ -76,7 +116,10 @@ io.sockets.on('connection', function (socket) {
 		
 		socket.on('SteeringMotorConfig', function (data) {
 			// so wird dieser Text an alle anderen Benutzer gesendet
-			io.sockets.emit('SteeringMotorConfig', { SteeringSpeedMax: data.SteeringSpeedMax, SteeringSpeedMin: data.SteeringSpeedMin });
+			SteeringMotorConfig.SteeringSpeedMax = data.SteeringSpeedMax;
+			SteeringMotorConfig.SteeringSpeedMin = data.SteeringSpeedMin;
+			
+			io.sockets.emit('SteeringMotorConfig', { SteeringSpeedMax: SteeringMotorConfig.SteeringSpeedMax, SteeringSpeedMin: SteeringMotorConfig.SteeringSpeedMin });
 		/*
 	console.log("Lenkung Speed");
 			console.log("Lenkmotor Speed Max : " + data.SteeringSpeedMax);
@@ -87,8 +130,12 @@ io.sockets.on('connection', function (socket) {
 		});
 		
 		socket.on('EngineConfig', function (data) {
+		
+			EngineConfig.EngineSpeedStartMin = data.EngineSpeedStartMin;
+			EngineConfig.EngineSpeedMax = data.EngineSpeedMax;
+			EngineConfig.EngineRampTime = data.EngineRampTime;
 			// so wird dieser Text an alle anderen Benutzer gesendet
-			io.sockets.emit('EngineConfig', { EngineSpeedStartMin: data.EngineSpeedStartMin, EngineSpeedMax: data.EngineSpeedMax, EngineRampTime: data.EngineRampTime });
+			io.sockets.emit('EngineConfig', { EngineSpeedStartMin: EngineConfig.EngineSpeedStartMin, EngineSpeedMax: EngineConfig.EngineSpeedMax, EngineRampTime: EngineConfig.EngineRampTime });
 			/*
 console.log("Motor Speed");
 			console.log("Motor Start Speed Max : " + data.EngineSpeedStartMin);
@@ -124,8 +171,12 @@ console.log("Motor Speed");
 		});
 		
 		socket.on('SteeringMotorConfigDOM', function (data) {
-			io.sockets.emit('SteeringMotorConfigDOM', { SteeringSpeedMax_MaxDOM: data.SteeringSpeedMax_MaxDOM , SteeringSpeedMax_MinDOM: data.SteeringSpeedMax_MinDOM , SteeringSpeedMin_MaxDOM: data.SteeringSpeedMin_MaxDOM , SteeringSpeedMin_MinDOM: data.SteeringSpeedMin_MinDOM });
-			
+			//io.sockets.emit('SteeringMotorConfigDOM', { SteeringSpeedMax_MaxDOM: data.SteeringSpeedMax_MaxDOM , SteeringSpeedMax_MinDOM: data.SteeringSpeedMax_MinDOM , SteeringSpeedMin_MaxDOM: data.SteeringSpeedMin_MaxDOM , SteeringSpeedMin_MinDOM: data.SteeringSpeedMin_MinDOM });
+			console.log("JOJO");
+			console.log(data.SteeringSpeedMax_MaxDOM);
+			console.log(data.SteeringSpeedMax_MinDOM);
+			console.log(data.SteeringSpeedMin_MaxDOM);
+			console.log(data.SteeringSpeedMin_MinDOM);
 		});
 		
 
@@ -148,6 +199,13 @@ console.log("Motor Speed");
 			
 			io.sockets.emit('SaveSettings');
 			/* console.log("SaveSettings"); */
+			
+		});
+		
+		socket.on('geodata', function(data) {
+			
+			io.sockets.emit('geodata', { latitude: data.latitude, longitude: data.longitude});
+			console.log(data.latitude + " " + data.longitude); 
 			
 		});
 		

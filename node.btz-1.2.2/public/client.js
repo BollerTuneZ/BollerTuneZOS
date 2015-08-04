@@ -1,4 +1,8 @@
 
+
+
+
+
 var socket = io.connect();
 $(document).ready(function(){
 
@@ -6,11 +10,18 @@ $(document).ready(function(){
 	
 	RestoreSettingsDOM(); 
 */
+
+		socket.on('connect', function(){
+			var sessionid = socket.io.engine.id;
+			console.log(sessionid);
+			
+			
+		});
 	
 	
 		socket.on('StartService', function() {
-		/* 	console.log("StartService"); */
-		});
+		console.log("StartService");
+		 		});
 		
 		socket.on('StopService', function() {
 			/* console.log("StopService"); */
@@ -66,6 +77,6 @@ $(document).ready(function(){
 		$('#StartService').click(StartService);
 		$('#StopService').click(StopService);
 		$('#SaveSettings').click(SaveSettings);
-		$('#RestoreSettings').click(RestoreSettings;
+		$('#RestoreSettings').click(RestoreSettings);
 
 	});
